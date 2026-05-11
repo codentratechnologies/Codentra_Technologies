@@ -1,0 +1,473 @@
+.hero-section {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 140px 0 80px;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+}
+
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--color-primary);
+  top: -100px;
+  left: -100px;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--color-secondary);
+  bottom: -100px;
+  right: -100px;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 4rem;
+  z-index: 1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  margin-bottom: 2.5rem;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-primary);
+  animation: pulse-glow 2s infinite;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+.hero-desc {
+  font-size: 1.25rem;
+  color: var(--color-text-dim);
+  max-width: 600px;
+  margin-bottom: 3.5rem;
+  line-height: 1.8;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+  padding: 2rem;
+  /* Added padding to ensure nodes have room to float */
+}
+
+.orbital-system {
+  position: relative;
+  width: 420px;
+  /* Reduced from 500px to fit desktop grid better */
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  animation: main-float 6s ease-in-out infinite;
+}
+
+.logo-center-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-pulse {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.2;
+  animation: pulse-core 4s ease-in-out infinite;
+}
+
+.logo-center {
+  position: relative;
+  z-index: 11;
+  filter: drop-shadow(0 0 30px var(--color-primary-glow));
+  background: rgba(15, 23, 42, 0.4);
+  padding: 18px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.center-logo {
+  height: 80px;
+  /* Slightly reduced */
+  width: auto;
+}
+
+/* Orbital Rings */
+.orbital {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform-style: preserve-3d;
+}
+
+.orbit-1 {
+  width: 100%;
+  height: 100%;
+  transform: rotateX(70deg) rotateY(10deg);
+  animation: rotate-orbit-1 20s linear infinite;
+}
+
+.orbit-2 {
+  width: 75%;
+  height: 75%;
+  transform: rotateX(-60deg) rotateY(-20deg);
+  animation: rotate-orbit-2 15s linear infinite;
+}
+
+.orbit-3 {
+  width: 50%;
+  height: 50%;
+  transform: rotateX(45deg) rotateY(30deg);
+  animation: rotate-orbit-3 10s linear infinite;
+}
+
+/* Tech Nodes - Adjusted positions to stay within bounds */
+.tech-node {
+  position: absolute;
+  padding: 0.6rem 1.2rem;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 11;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  animation: node-float 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.node-1 {
+  top: 10%;
+  right: 0%;
+  animation-delay: 0s;
+}
+
+.node-2 {
+  bottom: 15%;
+  left: -2%;
+  animation-delay: 0.5s;
+}
+
+.node-3 {
+  top: -5%;
+  left: 20%;
+  animation-delay: 1s;
+}
+
+.node-4 {
+  bottom: 0%;
+  right: 10%;
+  animation-delay: 1.5s;
+}
+
+.node-5 {
+  top: 40%;
+  left: -5%;
+  animation-delay: 2s;
+}
+
+.node-6 {
+  bottom: 35%;
+  right: -5%;
+  animation-delay: 2.5s;
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.5;
+}
+
+.p-1 {
+  top: 10%;
+  left: 10%;
+  animation: particle-move 8s infinite;
+}
+
+.p-2 {
+  bottom: 15%;
+  right: 15%;
+  animation: particle-move 12s infinite reverse;
+}
+
+.p-3 {
+  top: 60%;
+  right: 5%;
+  animation: particle-move 10s infinite;
+}
+
+.p-4 {
+  bottom: 40%;
+  left: 5%;
+  animation: particle-move 15s infinite reverse;
+}
+
+/* Animations */
+@keyframes rotate-orbit-1 {
+  from {
+    transform: rotateX(70deg) rotateY(10deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(70deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate-orbit-2 {
+  from {
+    transform: rotateX(-60deg) rotateY(-20deg) rotateZ(360deg);
+  }
+
+  to {
+    transform: rotateX(-60deg) rotateY(-20deg) rotateZ(0deg);
+  }
+}
+
+@keyframes rotate-orbit-3 {
+  from {
+    transform: rotateX(45deg) rotateY(30deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(45deg) rotateY(30deg) rotateZ(360deg);
+  }
+}
+
+@keyframes pulse-core {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.25;
+  }
+}
+
+@keyframes node-float {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+@keyframes main-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes particle-move {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.5;
+  }
+
+  75% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(100px, -100px);
+    opacity: 0;
+  }
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slide-up 0.8s forwards;
+}
+
+.hero-title.animate-slide-up {
+  animation-delay: 0.2s;
+}
+
+.hero-desc.animate-slide-up {
+  animation-delay: 0.4s;
+}
+
+.hero-cta.animate-slide-up {
+  animation-delay: 0.6s;
+}
+
+@media (max-width: 1200px) {
+  .hero-container {
+    gap: 2rem;
+  }
+
+  .orbital-system {
+    width: 380px;
+    height: 380px;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 4rem;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-visual {
+    order: 1;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  .orbital-system {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .orbital-system {
+    width: 280px;
+    height: 280px;
+  }
+
+  .center-logo {
+    height: 60px;
+  }
+
+  .tech-node {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+  }
+
+  .node-5,
+  .node-6 {
+    display: none;
+  }
+
+  /* Hide clutter on small screens */
+}
+
+@media (max-width: 480px) {
+  .orbital-system {
+    width: 240px;
+    height: 240px;
+  }
+
+  .node-2,
+  .node-4 {
+    display: none;
+  }
+
+  /* Further simplify on very small screens */
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+  }
+}
