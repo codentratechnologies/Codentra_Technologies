@@ -9,7 +9,7 @@ export const siteConfig = {
   phone: "+91 9316877335",
   address: "Bangalore, India",
   whatsapp: "https://wa.me/919316877335",
-  aboutImage: "/src/assets/about-team.png",
+  aboutImage: "/images/about-team.png",
   socials: {
     github: "https://github.com/codentratechnologies",
     linkedin: "https://www.linkedin.com/company/codentratechnologies",
@@ -90,7 +90,7 @@ export const projects = [
     category: "Web App",
     desc: "A high-performance e-commerce platform with real-time inventory management and AI-driven recommendations.",
     tech: ["React", "Node.js", "MongoDB", "Tailwind"],
-    image: "/src/assets/project-ecommerce.png",
+    image: "/images/project-ecommerce.png",
   },
   {
     id: 2,
@@ -98,7 +98,7 @@ export const projects = [
     category: "SaaS",
     desc: "Comprehensive business management system for tracking KPIs, employee performance, and financial analytics.",
     tech: ["React", "Python", "PostgreSQL", "Framer"],
-    image: "/src/assets/project-dashboard.png",
+    image: "/images/project-dashboard.png",
   },
   {
     id: 3,
@@ -106,7 +106,7 @@ export const projects = [
     category: "Mobile",
     desc: "Sleek and intuitive CRM mobile application for real-time lead tracking and client communication.",
     tech: ["Flutter", "Firebase", "Node.js"],
-    image: "/src/assets/project-mobile.png",
+    image: "/images/project-mobile.png",
   },
 ];
 

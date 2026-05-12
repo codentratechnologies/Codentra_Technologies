@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { navLinks, siteConfig } from '../../data/siteData';
 import Button from '../common/Button';
-import logo from '../../assets/Logo Removed Bg.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -20,7 +19,7 @@ const Navbar = () => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         <a href="#home" className="logo-container">
-          <img src={logo} alt={siteConfig.name} className="nav-logo" />
+          <img src="/images/logo-removed-bg.png" alt={siteConfig.name} className="nav-logo" />
         </a>
 
         <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>

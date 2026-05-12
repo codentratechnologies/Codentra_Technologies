@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Button from '../components/common/Button';
-import logo from '../assets/Logo Removed Bg.png';
 import { siteConfig } from '../data/siteData';
 import './Hero.css';
 
@@ -91,7 +90,7 @@ const Hero = () => {
             <div className="logo-center-wrapper">
               <div className="logo-pulse"></div>
               <div className="logo-center">
-                <img src={logo} alt={siteConfig.name} className="center-logo" />
+                <img src="/images/logo-removed-bg.png" alt={siteConfig.name} className="center-logo" />
               </div>
             </div>
 
