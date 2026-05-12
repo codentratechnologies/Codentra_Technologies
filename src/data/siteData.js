@@ -31,7 +31,7 @@ export const stats = [
   { value: "01", label: "Active" },
 ];
 
-export const techStack = ['Node.js', 'Next.js', 'React.js', 'Android', 'Flutter', 'Python', 'Firebase', 'PostgreSQL', 'MongoDB', 'AWS'];
+export const techStack = ['Node.js', 'Next.js', 'React.js', 'Android', 'Flutter', 'Python', 'RPA Automation', 'Firebase', 'PostgreSQL', 'MongoDB', 'AWS'];
 
 export const ctaContent = {
   title: "Ready to scale your digital presence?",

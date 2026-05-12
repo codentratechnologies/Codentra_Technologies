@@ -106,6 +106,7 @@ const Hero = () => {
             <div className="tech-node node-4">Node.js</div>
             <div className="tech-node node-5">AI/ML</div>
             <div className="tech-node node-6">DevOps</div>
+            <div className="tech-node node-7">RPA Automation</div>
 
             {/* Ambient Particles */}
             <div className="particle p-1"></div>

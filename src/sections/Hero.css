@@ -203,39 +203,45 @@
 }
 
 .node-1 {
-  top: 10%;
-  right: 0%;
+  top: 0%;
+  right: 5%;
   animation-delay: 0s;
 }
 
 .node-2 {
-  bottom: 15%;
-  left: -2%;
+  bottom: 10%;
+  left: 5%;
   animation-delay: 0.5s;
 }
 
 .node-3 {
-  top: -5%;
-  left: 20%;
+  top: 0%;
+  left: 8%;
   animation-delay: 1s;
 }
 
 .node-4 {
-  bottom: 0%;
-  right: 10%;
+  bottom: 10%;
+  right: 6%;
   animation-delay: 1.5s;
 }
 
 .node-5 {
-  top: 40%;
-  left: -5%;
+  top: 36%;
+  left: -6%;
   animation-delay: 2s;
 }
 
 .node-6 {
-  bottom: 35%;
-  right: -5%;
+  top: 36%;
+  right: -8%;
   animation-delay: 2.5s;
+}
+
+.node-7 {
+  bottom: -10%;
+  left: 34%;
+  animation-delay: 3s;
 }
 
 /* Particles */
@@ -455,12 +461,13 @@
     font-size: 0.65rem;
   }
 
-  .node-1 { top: -5%; right: -5%; }
-  .node-2 { bottom: -5%; left: -5%; }
-  .node-3 { top: -8%; left: 10%; }
-  .node-4 { bottom: -8%; right: 5%; }
-  .node-5 { top: 20%; left: -10%; }
-  .node-6 { bottom: 20%; right: -10%; }
+  .node-1 { top: 0%; right: 2%; }
+  .node-2 { bottom: 8%; left: 2%; }
+  .node-3 { top: 0%; left: 6%; }
+  .node-4 { bottom: 8%; right: 2%; }
+  .node-5 { top: 35%; left: -8%; }
+  .node-6 { top: 35%; right: -8%; }
+  .node-7 { bottom: -10%; left: 30%; }
 }
 
 @media (max-width: 576px) {
@@ -500,10 +507,11 @@
     font-size: 1.05rem;
   }
 
-  .node-1 { top: -8%; right: -5%; }
-  .node-2 { bottom: -8%; left: -5%; }
-  .node-3 { top: -12%; left: 0%; }
-  .node-4 { bottom: -12%; right: 5%; }
-  .node-5 { top: 20%; left: -12%; }
-  .node-6 { bottom: 20%; right: -12%; }
+  .node-1 { top: 0%; right: 0%; }
+  .node-2 { bottom: 6%; left: 0%; }
+  .node-3 { top: 0%; left: 5%; }
+  .node-4 { bottom: 6%; right: 0%; }
+  .node-5 { top: 35%; left: -10%; }
+  .node-6 { top: 35%; right: -10%; }
+  .node-7 { bottom: -12%; left: 26%; }
 }
