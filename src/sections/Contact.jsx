@@ -109,7 +109,7 @@ const Contact = () => {
                   >
                      <div className="method-icon"><FiMapPin /></div>
                      <div className="method-details">
-                        <span className="method-label">Global HQ</span>
+                        <span className="method-label">Location</span>
                         <span className="method-value">{siteConfig.address}</span>
                      </div>
                   </motion.a>

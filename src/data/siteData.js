@@ -35,7 +35,7 @@ export const techStack = ['Node.js', 'Next.js', 'React.js', 'Android', 'Flutter'
 
 export const ctaContent = {
   title: "Ready to scale your digital presence?",
-  desc: "Join 50+ companies already building with Codentra Technologies.",
+  desc: "Partner with Codentra Technologies to build cutting-edge, scalable digital solutions.",
   btnText: "Start a Project",
   href: "#contact"
 };
