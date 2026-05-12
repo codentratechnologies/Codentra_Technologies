@@ -39,16 +39,24 @@ const Navbar = () => {
           </a>
 
           <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
+            <div className="mobile-drawer-header">
+              <img src="/images/logo-removed-bg.png" alt={siteConfig.name} className="drawer-logo" />
+              <button className="drawer-close" onClick={() => setIsMobileMenuOpen(false)} aria-label="Close Menu">
+                ✕
+              </button>
+            </div>
+            <div className="drawer-nav-items">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="nav-link"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
             <Button href="#contact" variant="primary" className="mobile-cta" onClick={() => setIsMobileMenuOpen(false)}>Get Started</Button>
           </div>
 

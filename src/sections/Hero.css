@@ -454,6 +454,13 @@
     padding: 0.4rem 0.8rem;
     font-size: 0.65rem;
   }
+
+  .node-1 { top: -5%; right: -5%; }
+  .node-2 { bottom: -5%; left: -5%; }
+  .node-3 { top: -8%; left: 10%; }
+  .node-4 { bottom: -8%; right: 5%; }
+  .node-5 { top: 20%; left: -10%; }
+  .node-6 { bottom: 20%; right: -10%; }
 }
 
 @media (max-width: 576px) {
@@ -492,4 +499,11 @@
   .hero-desc {
     font-size: 1.05rem;
   }
+
+  .node-1 { top: -8%; right: -5%; }
+  .node-2 { bottom: -8%; left: -5%; }
+  .node-3 { top: -12%; left: 0%; }
+  .node-4 { bottom: -12%; right: 5%; }
+  .node-5 { top: 20%; left: -12%; }
+  .node-6 { bottom: 20%; right: -12%; }
 }
