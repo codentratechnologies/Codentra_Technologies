@@ -89,3 +89,10 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+@media (max-width: 768px) {
+  .service-link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

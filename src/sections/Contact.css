@@ -28,6 +28,9 @@
   gap: 1.5rem;
   text-decoration: none;
   transition: var(--transition-base);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 a.method-item:hover .method-icon {
@@ -43,6 +46,7 @@ a.method-item:hover .method-value {
 .method-icon {
   width: 50px;
   height: 50px;
+  flex-shrink: 0;
   background: rgba(14, 165, 233, 0.1);
   border-radius: 12px;
   display: flex;
@@ -50,6 +54,13 @@ a.method-item:hover .method-value {
   justify-content: center;
   font-size: 1.25rem;
   color: var(--color-primary);
+}
+
+.method-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .method-label {
@@ -66,6 +77,9 @@ a.method-item:hover .method-value {
   font-size: 1.125rem;
   font-weight: 700;
   color: #fff;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: block;
 }
 
 .form-card {
@@ -101,6 +115,9 @@ a.method-item:hover .method-value {
 
 .form-group input, 
 .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
@@ -120,6 +137,8 @@ a.method-item:hover .method-value {
 
 .submit-btn {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 1.25rem !important;
   margin-top: 1rem;
 }
@@ -132,18 +151,54 @@ a.method-item:hover .method-value {
   font-weight: 600;
 }
 
+.contact-form-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 @media (max-width: 1024px) {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 4rem;
   }
   .form-card {
-    padding: 2rem !important;
+    padding: 2.5rem 1.5rem !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 768px) {
   .form-row {
     grid-template-columns: 1fr;
+  }
+  .premium-form {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 1.5rem 1rem !important;
+  }
+  .form-group input, 
+  .form-group textarea {
+    padding: 0.8rem 1rem;
+    font-size: 0.875rem;
+  }
+  .contact-grid {
+    gap: 3rem;
+  }
+  .method-item {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .method-value {
+    font-size: 0.875rem;
   }
 }

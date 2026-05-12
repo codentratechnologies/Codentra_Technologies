@@ -186,6 +186,24 @@
   }
   .about-footer-actions {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .about-cta {
+    width: 88% !important;
+    max-width: 340px;
+    padding: 0.8rem 1.2rem !important;
+    font-size: 0.8rem !important;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+  }
+  .founder-signature {
+    align-items: center;
+  }
+  .sig-line {
+    background: linear-gradient(to right, transparent, var(--color-primary), transparent);
   }
 }

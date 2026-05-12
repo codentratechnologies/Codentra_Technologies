@@ -63,6 +63,9 @@
   color: var(--color-text-dim);
   text-decoration: none;
   transition: var(--transition-fast);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex-wrap: wrap;
 }
 
 .footer-contact .contact-item:hover {
@@ -72,6 +75,7 @@
 
 .footer-contact .contact-item svg {
   color: var(--color-primary);
+  flex-shrink: 0;
 }
 
 .footer-bottom {
