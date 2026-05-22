@@ -1,6 +1,6 @@
-import { 
-  FiMonitor, FiSmartphone, FiLayers, FiCode, 
-  FiDatabase, FiCloud, FiLayout, FiCpu 
+import {
+  FiMonitor, FiSmartphone, FiLayers, FiCode,
+  FiDatabase, FiCloud, FiLayout, FiCpu
 } from 'react-icons/fi';
 
 export const siteConfig = {
@@ -86,27 +86,57 @@ export const services = [
 export const projects = [
   {
     id: 1,
-    title: "E-Commerce Titan",
-    category: "Web App",
-    desc: "A high-performance e-commerce platform with real-time inventory management and AI-driven recommendations.",
-    tech: ["React", "Node.js", "MongoDB", "Tailwind"],
-    image: "/images/project-ecommerce.png",
+    title: "Creative Canvas",
+    category: "Website",
+    client: "Drashti Gajera",
+    desc: "A creative and modern digital platform with interactive UI/UX and smooth user experience.",
+    tech: ["React.js", "Node.js"],
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 2,
-    title: "Enterprise Dashboard",
-    category: "SaaS",
-    desc: "Comprehensive business management system for tracking KPIs, employee performance, and financial analytics.",
-    tech: ["React", "Python", "PostgreSQL", "Framer"],
-    image: "/images/project-dashboard.png",
+    title: "Radheshyam Furniture",
+    category: "Flutter Mobile App",
+    client: "Rohit Asodariya",
+    desc: "A furniture calculation and workflow management mobile application for pricing, measurements, and order management.",
+    tech: ["Flutter", "Firebase"],
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 3,
-    title: "Nova CRM Mobile",
-    category: "Mobile",
-    desc: "Sleek and intuitive CRM mobile application for real-time lead tracking and client communication.",
-    tech: ["Flutter", "Firebase", "Node.js"],
-    image: "/images/project-mobile.png",
+    title: "Aura Finance",
+    category: "Finance Platform / Website",
+    client: "Aura Finance",
+    desc: "A finance and share market management platform with analytics, dashboards, and business financial workflows.",
+    tech: ["Python", "Next.js", "PostgreSQL"],
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
   },
+  {
+    id: 4,
+    title: "Madhav Ecommerce Sales Dashboard",
+    category: "Power BI Dashboard",
+    client: "Madhav Industries",
+    desc: "An ecommerce analytics and sales dashboard for monitoring revenue, orders, profits, customer insights, and performance metrics.",
+    tech: ["Power BI", "Excel", "SQL"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 5,
+    title: "Eventia App",
+    category: "Android App + Admin Panel",
+    client: "Eventia Solutions",
+    desc: "An event management platform with mobile application and admin dashboard for booking, event handling, and customer management.",
+    tech: ["Android", "React.js", "Python"],
+    image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 6,
+    title: "Nexora CRM",
+    category: "CRM Platform",
+    client: "Nexora Technologies",
+    desc: "A customer relationship management system for lead tracking, sales automation, and workflow management.",
+    tech: ["React.js", "Node.js", "MongoDB"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+  }
 ];
 

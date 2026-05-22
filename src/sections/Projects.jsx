@@ -55,7 +55,11 @@ const Projects = () => {
             <motion.div key={project.id} variants={itemVariants} className="project-wrapper">
               <Card className="project-card" glow={true}>
                 <div className="project-image">
-                  <img src={project.image} alt={project.title} />
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80"; }} 
+                  />
                   <motion.div 
                     className="project-overlay"
                     initial={{ opacity: 0 }}
@@ -67,6 +71,7 @@ const Projects = () => {
                 <div className="project-info">
                   <span className="project-category">{project.category}</span>
                   <h3 className="project-title">{project.title}</h3>
+                  <div className="project-client" style={{ color: "var(--color-primary)", fontSize: "0.85rem", marginBottom: "0.5rem", fontWeight: "600" }}>Client: {project.client}</div>
                   <p className="project-desc">{project.desc}</p>
                   <div className="project-tech">
                     {project.tech.map(t => <span key={t} className="tech-tag">{t}</span>)}

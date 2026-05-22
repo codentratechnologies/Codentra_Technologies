@@ -114,10 +114,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 3.5rem;
   }
+
   .footer-brand {
     grid-column: span 2;
     max-width: 100%;
   }
+
   .footer-desc {
     max-width: 500px;
   }
@@ -127,11 +129,13 @@
   .footer {
     padding-top: 4rem;
   }
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
     padding-bottom: 4rem;
   }
+
   .footer-brand {
     grid-column: span 1;
   }
@@ -141,6 +145,7 @@
   .footer-contact .contact-item {
     gap: 0.75rem;
   }
+
   .footer-contact .contact-item span {
     font-size: 0.875rem;
   }

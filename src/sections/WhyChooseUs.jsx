@@ -42,7 +42,7 @@ const WhyChooseUs = () => {
           </div>
         </Reveal>
 
-        <motion.div 
+        <motion.div
           className="grid grid-4 why-grid"
           variants={containerVariants}
           initial="hidden"

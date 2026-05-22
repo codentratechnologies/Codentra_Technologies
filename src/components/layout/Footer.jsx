@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer-brand">
           <h3 className="brand-name">{siteConfig.name}</h3>
           <p className="footer-desc">
-            Architecting the future of digital innovation with scalable software solutions 
+            Architecting the future of digital innovation with scalable software solutions
             and premium engineering excellence.
           </p>
           <div className="social-links">
@@ -37,10 +37,10 @@ const Footer = () => {
           <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} className="contact-item">
             <FiPhone /> <span>{siteConfig.phone}</span>
           </a>
-          <a 
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.address)}`} 
-            target="_blank" 
-            rel="noreferrer" 
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.address)}`}
+            target="_blank"
+            rel="noreferrer"
             className="contact-item"
           >
             <FiMapPin /> <span>{siteConfig.address}</span>
