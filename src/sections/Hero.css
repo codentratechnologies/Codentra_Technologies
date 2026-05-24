@@ -147,12 +147,22 @@
   border-radius: 50%;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .center-logo {
   height: 80px;
   /* Slightly reduced */
   width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* Orbital Rings */
@@ -454,6 +464,7 @@
 
   .center-logo {
     height: 60px;
+    width: auto;
   }
 
   .tech-node {

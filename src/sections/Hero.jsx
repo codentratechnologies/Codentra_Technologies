@@ -90,7 +90,16 @@ const Hero = () => {
             <div className="logo-center-wrapper">
               <div className="logo-pulse"></div>
               <div className="logo-center">
-                <img src="/images/logo-removed-bg.png" alt={siteConfig.name} className="center-logo" />
+                <picture>
+                  <img 
+                    src="/images/logo-removed-bg.png" 
+                    srcSet="/images/logo-removed-bg.png 1x, /images/logo-removed-bg.png 2x"
+                    alt={siteConfig.name} 
+                    className="center-logo" 
+                    loading="eager"
+                    decoding="async"
+                  />
+                </picture>
               </div>
             </div>
 

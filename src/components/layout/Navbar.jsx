@@ -34,13 +34,32 @@ const Navbar = () => {
       ></div>
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container nav-container">
-          <a href="#home" className="logo-container">
-            <img src="/images/logo-removed-bg.png" alt={siteConfig.name} className="nav-logo" />
+          <a href="#home" className="logo-container" aria-label="Home">
+            <picture>
+              <source srcSet="/images/logo-removed-bg.png" type="image/png" />
+              <img 
+                src="/images/logo-removed-bg.png" 
+                srcSet="/images/logo-removed-bg.png 1x, /images/logo-removed-bg.png 2x"
+                alt={siteConfig.name} 
+                className="nav-logo" 
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
           </a>
 
           <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
             <div className="mobile-drawer-header">
-              <img src="/images/logo-removed-bg.png" alt={siteConfig.name} className="drawer-logo" />
+              <picture>
+                <img 
+                  src="/images/logo-removed-bg.png" 
+                  srcSet="/images/logo-removed-bg.png 1x, /images/logo-removed-bg.png 2x"
+                  alt={siteConfig.name} 
+                  className="drawer-logo"
+                  loading="eager"
+                  decoding="async" 
+                />
+              </picture>
               <button className="drawer-close" onClick={() => setIsMobileMenuOpen(false)} aria-label="Close Menu">
                 ✕
               </button>

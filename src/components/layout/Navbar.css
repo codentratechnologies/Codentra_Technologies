@@ -29,11 +29,19 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 0;
 }
 
 .nav-logo {
   height: 50px;
   width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
   filter: drop-shadow(0 0 12px var(--color-primary-glow));
 }
 
@@ -131,6 +139,13 @@
   .drawer-logo {
     height: 36px;
     width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
   }
 
   .drawer-close {
