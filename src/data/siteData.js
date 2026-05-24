@@ -7,6 +7,7 @@ export const siteConfig = {
   name: "Codentra Technologies",
   email: "codentratechnologies@gmail.com",
   phone: "+91 9316877335",
+  displayPhone: "+91 93XXXXXX35",
   address: "Bangalore, India",
   whatsapp: "https://wa.me/919316877335",
   aboutImage: "/images/about-team.png",

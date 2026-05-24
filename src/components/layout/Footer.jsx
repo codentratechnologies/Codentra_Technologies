@@ -35,7 +35,7 @@ const Footer = () => {
             <FiMail /> <span>{siteConfig.email}</span>
           </a>
           <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} className="contact-item">
-            <FiPhone /> <span>{siteConfig.phone}</span>
+            <FiPhone /> <span>{siteConfig.displayPhone || siteConfig.phone}</span>
           </a>
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.address)}`}

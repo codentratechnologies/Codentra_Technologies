@@ -97,7 +97,7 @@ const Contact = () => {
                      <div className="method-icon"><FiPhone /></div>
                      <div className="method-details">
                         <span className="method-label">Voice Channel</span>
-                        <span className="method-value">{siteConfig.phone}</span>
+                        <span className="method-value">{siteConfig.displayPhone || siteConfig.phone}</span>
                      </div>
                   </motion.a>
                   <motion.a
