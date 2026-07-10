@@ -6,7 +6,7 @@
 .carousel-container {
   position: relative;
   max-width: 800px;
-  margin: 4rem auto 0;
+  margin: 4rem auto 6rem;
   height: 400px;
   display: flex;
   flex-direction: column;
