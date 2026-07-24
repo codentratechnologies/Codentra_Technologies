@@ -1,86 +1,90 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { projects } from '../data/siteData';
-import Card from '../components/common/Card';
-import Reveal from '../components/common/Reveal';
-import { FiArrowUpRight } from 'react-icons/fi';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { projectsData } from '../data/siteData';
 import './Projects.css';
 
-const Projects = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+gsap.registerPlugin(ScrollTrigger);
 
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: 30 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
-    },
-  };
+const Projects = () => {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    const cards = gsap.utils.toArray('.work-card');
+    
+    // Create the stacked pinning effect
+    cards.forEach((card, i) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 15%', // Pin when the card hits 15% from top
+        endTrigger: containerRef.current,
+        end: 'bottom bottom',
+        pin: true,
+        pinSpacing: false, // Don't add spacing so they overlap
+        id: `card-${i}`
+      });
+
+      // Optional: Add a slight scale down or darken effect to cards behind
+      if (i > 0) {
+        gsap.fromTo(card, 
+          { y: 100, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              end: 'top 20%',
+              scrub: true
+            }
+          }
+        );
+      }
+    });
+
+  }, { scope: containerRef });
 
   return (
-    <section id="projects" className="section projects-section">
-      <div className="container">
-        <Reveal width="100%">
-          <div className="section-header">
-            <span className="section-badge">Case Studies</span>
-            <h2 className="section-title">Selected <span className="text-gradient">Engineering Feats</span></h2>
-            <p className="section-desc">
-              Explore our portfolio of high-performance applications and enterprise 
-              solutions delivered to clients worldwide.
-            </p>
-          </div>
-        </Reveal>
+    <section id="projects" className="projects-section" ref={containerRef}>
+      <div className="projects-header">
+        <div className="projects-header-label">
+          <span className="dot"></span>
+          <p>Our Work</p>
+        </div>
+        <h2>Unseen Possibilities.</h2>
+        <p className="projects-desc">
+          Codentra Technologies is a people-first technology company focused on building innovative digital solutions that care about your business growth and product success as much as you do.
+        </p>
+        <a href="#contact" className="view-all-btn">View All Projects</a>
+      </div>
 
-        <motion.div 
-          className="grid grid-3 projects-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {projects.map((project) => (
-            <motion.div key={project.id} variants={itemVariants} className="project-wrapper">
-              <Card className="project-card" glow={true}>
-                <div className="project-image">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80"; }} 
-                  />
-                  <motion.div 
-                    className="project-overlay"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                  >
-                    <FiArrowUpRight className="overlay-icon" />
-                  </motion.div>
+      <div className="projects-cards-container">
+        {projectsData.map((project, idx) => (
+          <div key={idx} className="work-card">
+            <div className="work-card-left">
+              <h3>{project.title}</h3>
+              <p>{project.desc}</p>
+              
+              <div className="work-card-stats">
+                <div className="stat-item">
+                  <h4>{project.statValue}</h4>
+                  <p>{project.statLabel}</p>
                 </div>
-                <div className="project-info">
-                  <span className="project-category">{project.category}</span>
-                  <h3 className="project-title">{project.title}</h3>
-                  <div className="project-client" style={{ color: "var(--color-primary)", fontSize: "0.85rem", marginBottom: "0.5rem", fontWeight: "600" }}>Client: {project.client}</div>
-                  <p className="project-desc">{project.desc}</p>
-                  <div className="project-tech">
-                    {project.tech.map(t => <span key={t} className="tech-tag">{t}</span>)}
-                  </div>
+                <div className="divider"></div>
+                <div className="stat-item">
+                  <h4>{project.statValue2}</h4>
+                  <p>{project.statLabel2}</p>
                 </div>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+              </div>
+            </div>
+            
+            <div className="work-card-right">
+              {/* Placeholder image for mockup */}
+              <div className="mockup-placeholder"></div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

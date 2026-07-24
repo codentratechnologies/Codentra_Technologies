@@ -1,63 +1,93 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import Reveal from '../components/common/Reveal';
+import React, { useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { roadmapData } from '../data/siteData';
 import './Roadmap.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Roadmap = () => {
-  const steps = [
-    { year: 'Phase 1', title: 'Conceptualization', desc: 'Defining the product vision, market fit, and technical architecture.' },
-    { year: 'Phase 2', title: 'Engineering', desc: 'High-fidelity development, rigorous testing, and performance optimization.' },
-    { year: 'Phase 3', title: 'Deployment', desc: 'Secure cloud infrastructure setup and global product launch.' },
-    { year: 'Phase 4', title: 'Scale', desc: 'Continuous integration, feature expansion, and user-driven evolution.' }
-  ];
+  const containerRef = useRef(null);
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+  
+  const [activeIdx, setActiveIdx] = useState(0);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  };
+  useGSAP(() => {
+    const sections = gsap.utils.toArray('.roadmap-step');
+    
+    // Pin the entire container
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: 'top top',
+      end: '+=200%', // scroll duration
+      pin: true,
+      pinSpacing: true,
+    });
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    },
-  };
+    // Update active index based on scroll position within the pinned area
+    sections.forEach((sec, i) => {
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: `top ${-((i - 0.5) * (200 / sections.length))}%`,
+        end: `top ${-(i + 0.5) * (200 / sections.length)}%`,
+        onToggle: self => {
+          if (self.isActive) setActiveIdx(i);
+        }
+      });
+    });
+
+  }, { scope: containerRef });
 
   return (
-    <section id="roadmap" className="section roadmap-section">
-      <div className="container">
-        <Reveal width="100%">
-          <div className="section-header">
-            <span className="section-badge">Growth Strategy</span>
-            <h2 className="section-title">Our Engineering <span className="text-gradient">Roadmap</span></h2>
+    <section id="roadmap" className="roadmap-section" ref={containerRef}>
+      <div className="roadmap-container">
+        
+        <div className="roadmap-left" ref={leftRef}>
+          <div className="roadmap-header">
+            <span className="dot"></span>
+            <p>Our Approach</p>
           </div>
-        </Reveal>
-
-        <motion.div
-          className="roadmap-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {steps.map((step, i) => (
-            <motion.div key={i} variants={itemVariants} className="roadmap-item">
-              <div className="roadmap-dot"></div>
-              <div className="roadmap-content glass">
-                <span className="roadmap-year">{step.year}</span>
-                <h3 className="roadmap-title">{step.title}</h3>
-                <p className="roadmap-desc">{step.desc}</p>
+          <h2>How we turn <br/> ideas into reality.</h2>
+          
+          <div className="roadmap-steps-list">
+            {roadmapData.map((data, idx) => (
+              <div 
+                key={idx} 
+                className={`roadmap-step ${activeIdx === idx ? 'active' : ''}`}
+              >
+                <span className="step-num">0{idx + 1}</span>
+                <h3>{data.title}</h3>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="roadmap-right" ref={rightRef}>
+          <div className="roadmap-details">
+            {roadmapData.map((data, idx) => (
+              <div 
+                key={idx} 
+                className="roadmap-detail-card"
+                style={{
+                  opacity: activeIdx === idx ? 1 : 0,
+                  pointerEvents: activeIdx === idx ? 'auto' : 'none',
+                  transform: `translateY(${activeIdx === idx ? '0' : '20px'})`,
+                  transition: 'all 0.5s ease'
+                }}
+              >
+                <h4>{data.phase}</h4>
+                <ul>
+                  {data.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

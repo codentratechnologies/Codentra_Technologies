@@ -18,11 +18,12 @@ export const siteConfig = {
   }
 };
 export const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Work +', href: '#projects' },
+  { name: 'Industries +', href: '#industries' },
+  { name: 'Services +', href: '#services' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'FAQs', href: '#faqs' },
 ];
 
 export const stats = [
@@ -84,60 +85,83 @@ export const services = [
   }
 ];
 
-export const projects = [
+export const projectsData = [
   {
-    id: 1,
     title: "Creative Canvas",
-    category: "Website",
-    client: "Drashti Gajera",
     desc: "A creative and modern digital platform with interactive UI/UX and smooth user experience.",
-    tech: ["React.js", "Node.js"],
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    statValue: "+45%",
+    statLabel: "Engagement",
+    statValue2: "2x",
+    statLabel2: "Faster Load"
   },
   {
-    id: 2,
-    title: "Radheshyam Furniture",
-    category: "Flutter Mobile App",
-    client: "Rohit Asodariya",
-    desc: "A furniture calculation and workflow management mobile application for pricing, measurements, and order management.",
-    tech: ["Flutter", "Firebase"],
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
     title: "Aura Finance",
-    category: "Finance Platform / Website",
-    client: "Aura Finance",
     desc: "A finance and share market management platform with analytics, dashboards, and business financial workflows.",
-    tech: ["Python", "Next.js", "PostgreSQL"],
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
+    statValue: "$2M+",
+    statLabel: "Processed",
+    statValue2: "100%",
+    statLabel2: "Secure"
   },
   {
-    id: 4,
-    title: "Madhav Ecommerce Sales Dashboard",
-    category: "Power BI Dashboard",
-    client: "Madhav Industries",
-    desc: "An ecommerce analytics and sales dashboard for monitoring revenue, orders, profits, customer insights, and performance metrics.",
-    tech: ["Power BI", "Excel", "SQL"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
     title: "Eventia App",
-    category: "Android App + Admin Panel",
-    client: "Eventia Solutions",
     desc: "An event management platform with mobile application and admin dashboard for booking, event handling, and customer management.",
-    tech: ["Android", "React.js", "Python"],
-    image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80",
+    statValue: "10k+",
+    statLabel: "Users",
+    statValue2: "4.9",
+    statLabel2: "App Rating"
   },
   {
-    id: 6,
     title: "Nexora CRM",
-    category: "CRM Platform",
-    client: "Nexora Technologies",
     desc: "A customer relationship management system for lead tracking, sales automation, and workflow management.",
-    tech: ["React.js", "Node.js", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    statValue: "30%",
+    statLabel: "Sales Growth",
+    statValue2: "5h",
+    statLabel2: "Saved/Week"
   }
 ];
+
+export const testimonialsData = [
+  {
+    content: "Codentra completely transformed our digital presence. The architecture is incredibly robust.",
+    name: "Drashti Gajera",
+    role: "CEO",
+    company: "Creative Canvas"
+  },
+  {
+    content: "Their expertise in both design and deep tech made scaling our app seamless.",
+    name: "Rohit A.",
+    role: "Founder",
+    company: "Radheshyam Furniture"
+  },
+  {
+    content: "Lightning-fast delivery and a beautiful user experience. Highly recommended partner.",
+    name: "Priya S.",
+    role: "CTO",
+    company: "Aura Finance"
+  }
+];
+
+export const roadmapData = [
+  {
+    phase: "PHASE 1",
+    title: "Discovery & Strategy",
+    items: ["Deep dive into requirements", "Architecture planning", "UX/UI wireframing"]
+  },
+  {
+    phase: "PHASE 2",
+    title: "Engineering",
+    items: ["Agile development sprints", "Continuous integration", "Performance optimization"]
+  },
+  {
+    phase: "PHASE 3",
+    title: "Testing & QA",
+    items: ["Automated testing suite", "Security auditing", "User acceptance testing"]
+  },
+  {
+    phase: "PHASE 4",
+    title: "Deployment & Scale",
+    items: ["Cloud infrastructure setup", "Zero-downtime deployment", "Ongoing maintenance"]
+  }
+];
+
 

@@ -1,73 +1,87 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { services } from '../data/siteData';
-import Card from '../components/common/Card';
-import Reveal from '../components/common/Reveal';
-import * as Icons from 'react-icons/fi';
 import './Services.css';
 
-const Services = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+gsap.registerPlugin(ScrollTrigger);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
-    },
-  };
+const Services = () => {
+  const containerRef = useRef(null);
+
+  // Gradient of deep blues for the service cards
+  const cardColors = [
+    '#00BFFF', '#00A0E0', '#0070AA', '#004077',
+    '#0f172a', '#1e293b', '#334155', '#475569'
+  ];
+
+  useGSAP(() => {
+    const cards = gsap.utils.toArray('.service-card');
+    
+    cards.forEach((card, i) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: `top ${20 + (i * 2)}%`, // Stagger the pinning point slightly so they layer visibly
+        endTrigger: containerRef.current,
+        end: 'bottom bottom',
+        pin: true,
+        pinSpacing: false,
+        id: `service-card-${i}`
+      });
+      
+      // Add a scale effect to give a sense of depth
+      if (i > 0) {
+        gsap.fromTo(card,
+          { scale: 0.95, y: 100 },
+          {
+            scale: 1,
+            y: 0,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              end: `top ${20 + (i * 2)}%`,
+              scrub: true
+            }
+          }
+        );
+      }
+    });
+  }, { scope: containerRef });
 
   return (
-    <section id="services" className="section services-section">
-      <div className="container">
-        <Reveal width="100%">
-          <div className="section-header">
-            <span className="section-badge">Our Expertise</span>
-            <h2 className="section-title">Scaling Businesses with <span className="text-gradient">Core Technology</span></h2>
-            <p className="section-desc">
-              We provide end-to-end engineering solutions that bridge the gap between 
-              complex business requirements and high-performance digital products.
-            </p>
-          </div>
-        </Reveal>
+    <section id="services" className="services-section" ref={containerRef}>
+      <div className="services-header">
+        <div className="services-header-label">
+          <span className="dot"></span>
+          <p>Our Services</p>
+        </div>
+        <h2>From architecture design <br/>to AI-powered platforms</h2>
+        <p className="services-desc">
+          we design and build software for the future.
+        </p>
+      </div>
 
-        <motion.div 
-          className="grid grid-4 services-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {services.map((service, index) => {
-            const IconComponent = Icons[service.icon];
-            return (
-              <motion.div key={index} variants={itemVariants}>
-                <Card className="service-card" glow={true}>
-                  <div className="service-icon">
-                    {IconComponent && <IconComponent />}
-                  </div>
-                  <h3 className="service-title">{service.title}</h3>
-                  <p className="service-text">{service.desc}</p>
-                  <div className="service-link">
-                    Learn More <Icons.FiArrowRight />
-                  </div>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+      <div className="services-cards-container">
+        {services.map((service, idx) => (
+          <div 
+            key={idx} 
+            className="service-card"
+            style={{ 
+              backgroundColor: cardColors[idx % cardColors.length],
+              zIndex: idx + 1
+            }}
+          >
+            <div className="service-card-content">
+              <h3>{service.title}</h3>
+              <p>{service.desc}</p>
+            </div>
+            <div className="service-card-visual">
+               {/* Visual Placeholder */}
+               <div className="visual-circle"></div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

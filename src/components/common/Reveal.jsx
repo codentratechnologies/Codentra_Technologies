@@ -16,12 +16,12 @@ const Reveal = ({ children, width = "fit-content", delay = 0.25 }) => {
     <div ref={ref} style={{ position: "relative", width, overflow: "visible" }}>
       <motion.div
         variants={{
-          hidden: { opacity: 0, y: 75 },
+          hidden: { opacity: 0, y: 30 },
           visible: { opacity: 1, y: 0 },
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.div>
