@@ -191,7 +191,7 @@ const Hero = () => {
               </div>
             )}
           </div>
-          <div className="hero-device-mockup" style={{ border: '16px solid #222', borderRadius: '24px', boxSizing: 'border-box' }}></div>
+          <div className="hero-device-mockup"></div>
         </div>
 
       </div>
