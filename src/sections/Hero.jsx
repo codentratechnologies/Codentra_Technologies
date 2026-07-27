@@ -1,130 +1,201 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import Button from '../components/common/Button';
-import { siteConfig } from '../data/siteData';
+import React, { useRef, useState, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { ArrowDown } from 'lucide-react';
 import './Hero.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
+  const containerRef = useRef(null);
+  const videoPinRef = useRef(null);
+  const videoWrapperRef = useRef(null);
+  const videoRefs = useRef([]);
+  const lastInteractionTime = useRef(0);
+  const videos = ['/video1.mp4', '/video2.mp4', '/video3.mp4', '/video4.mp4'];
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(0);
+
+  // Keyboard and Horizontal Trackpad Navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isFullscreen) return;
+      
+      let nextIndex = currentVideo;
+      if (e.key === 'ArrowRight') {
+        nextIndex = Math.min(currentVideo + 1, videos.length - 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft') {
+        nextIndex = Math.max(currentVideo - 1, 0);
+        e.preventDefault();
+      }
+
+      if (nextIndex !== currentVideo) {
+        setCurrentVideo(nextIndex);
+      }
+    };
+
+    const handleWheel = (e) => {
+      if (!isFullscreen) return;
+      
+      // Handle horizontal swipe (trackpad)
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+        e.preventDefault();
+        
+        const now = Date.now();
+        if (now - lastInteractionTime.current < 600) return; // Debounce fast swipes
+        
+        let nextIndex = currentVideo;
+        if (e.deltaX > 0) {
+          nextIndex = Math.min(currentVideo + 1, videos.length - 1);
+        } else {
+          nextIndex = Math.max(currentVideo - 1, 0);
+        }
+
+        if (nextIndex !== currentVideo) {
+          lastInteractionTime.current = now;
+          setCurrentVideo(nextIndex);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [isFullscreen, currentVideo, videos.length]);
+
+  // Video Autoplay and Switching Logic
+  useEffect(() => {
+    videoRefs.current.forEach((vid, idx) => {
+      if (vid) {
+        if (idx === currentVideo) {
+          vid.play().catch(e => console.log('Autoplay prevented:', e));
+        } else {
+          vid.pause();
+          vid.currentTime = 0;
+        }
+      }
+    });
+  }, [currentVideo]);
+
+  const handleVideoEnded = () => {
+    if (isFullscreen) {
+      setCurrentVideo((prev) => (prev + 1) % videos.length); // Loop to next video
+    }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
-    },
-  };
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: videoPinRef.current,
+        start: 'center center',
+        end: '+=150%', // Just enough to scrub the zoom animation smoothly
+        pin: true,
+        scrub: 1,
+        onUpdate: (self) => {
+          // Trigger fullscreen state when the animation is mostly complete
+          if (self.progress > 0.8) {
+            setIsFullscreen(true);
+          } else {
+            setIsFullscreen(false);
+            if (currentVideo !== 0) setCurrentVideo(0); // Reset to first video when zooming out
+          }
+        }
+      }
+    });
 
-  const orbitalVariants = {
-    hidden: { opacity: 0, scale: 0.8, rotate: -10 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      transition: {
-        duration: 1.2,
-        ease: [0.25, 0.1, 0.25, 1],
-        delay: 0.8,
-      },
-    },
-  };
+    // Animate the video wrapper to cover screen
+    tl.to(videoWrapperRef.current, {
+      width: '100vw',
+      height: '100vh',
+      maxWidth: '100vw',
+      ease: 'power1.inOut',
+    }, 0);
+
+    tl.to('.hero-device-mockup', {
+      borderWidth: '0px',
+      borderRadius: '0px',
+      ease: 'power1.inOut',
+    }, 0);
+
+    tl.to('.hero-video-inner', {
+      borderRadius: '0px',
+      ease: 'power1.inOut',
+    }, 0);
+
+  }, { scope: containerRef });
 
   return (
-    <section id="home" className="hero-section">
-      <div className="hero-background">
-        <div className="grid-overlay"></div>
-        <div className="glow-orb orb-1"></div>
-        <div className="glow-orb orb-2"></div>
+    <section ref={containerRef} className="hero-wrapper">
+      
+      {/* Initial White State Text (Scrolls normally) */}
+      <div className="hero-content">
+        <div className="hero-text-container">
+          <h1 className="hero-heading">
+            The Digital Engineering Partner Built <br/> for What's Coming Next
+          </h1>
+          <a href="#projects" className="hero-btn" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            Explore Work
+            <ArrowDown size={18} className="arrow-icon" style={{ marginLeft: '8px' }} />
+          </a>
+        </div>
       </div>
 
-      <div className="container hero-container">
-        <motion.div
-          className="hero-content"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div variants={itemVariants} className="badge">
-            <span className="badge-dot"></span>
-            Next-Gen Digital Engineering
-          </motion.div>
-
-          <motion.h1 variants={itemVariants} className="hero-title">
-            Transforming Ideas <br />
-            Into <span className="text-gradient">Powerful Solutions</span>
-          </motion.h1>
-
-          <motion.p variants={itemVariants} className="hero-desc">
-            We architect scalable software, enterprise mobile applications, and
-            immersive digital experiences designed for the next generation of
-            business innovation.
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="hero-cta">
-            <Button href="#contact" variant="primary">Launch Project</Button>
-            <Button href="#services" variant="glass">Our Expertise</Button>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          className="hero-visual"
-          variants={orbitalVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="orbital-system">
-            {/* Central Hub */}
-            <div className="logo-center-wrapper">
-              <div className="logo-pulse"></div>
-              <div className="logo-center">
-                <picture>
-                  <img 
-                    src="/images/logo-removed-bg.png" 
-                    srcSet="/images/logo-removed-bg.png 1x, /images/logo-removed-bg.png 2x"
-                    alt={siteConfig.name} 
-                    className="center-logo" 
-                    loading="eager"
-                    decoding="async"
-                  />
-                </picture>
-              </div>
+      {/* Video Pin Container (Scrolls into view, then pins) */}
+      <div ref={videoPinRef} className="hero-video-pin-container">
+        
+        {/* Video Mockup (Scales up) */}
+        <div ref={videoWrapperRef} className="hero-video-wrapper">
+          <div className="hero-video-inner">
+            <div 
+              className="hero-video-slider"
+              style={{
+                display: 'flex',
+                width: `${videos.length * 100}%`,
+                height: '100%',
+                transition: 'transform 0.5s ease-in-out',
+                transform: `translateX(-${currentVideo * (100 / videos.length)}%)`
+              }}
+            >
+              {videos.map((src, idx) => (
+                <video 
+                  key={idx}
+                  ref={el => videoRefs.current[idx] = el}
+                  src={src} 
+                  autoPlay={idx === 0} 
+                  muted 
+                  playsInline
+                  onEnded={handleVideoEnded}
+                  className="hero-video"
+                  style={{ width: `${100 / videos.length}%`, height: '100%', objectFit: 'cover' }}
+                ></video>
+              ))}
             </div>
-
-            {/* Orbital Rings */}
-            <div className="orbital orbit-1"></div>
-            <div className="orbital orbit-2"></div>
-            <div className="orbital orbit-3"></div>
-
-            {/* Dynamic Tech Nodes */}
-            <div className="tech-node node-1">React</div>
-            <div className="tech-node node-2">Python</div>
-            <div className="tech-node node-3">Cloud</div>
-            <div className="tech-node node-4">Node.js</div>
-            <div className="tech-node node-5">AI/ML</div>
-            <div className="tech-node node-6">DevOps</div>
-            <div className="tech-node node-7">RPA Automation</div>
-
-            {/* Ambient Particles */}
-            <div className="particle p-1"></div>
-            <div className="particle p-2"></div>
-            <div className="particle p-3"></div>
-            <div className="particle p-4"></div>
+            
+            {/* Total Count Bar - Only visible in fullscreen */}
+            {isFullscreen && (
+              <div className="video-progress-container">
+                {videos.map((_, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`video-progress-bar ${idx === currentVideo ? 'active' : ''}`}
+                    onClick={() => setCurrentVideo(idx)} // Added click to navigate
+                    style={{ cursor: 'pointer' }}
+                  ></div>
+                ))}
+              </div>
+            )}
           </div>
-        </motion.div>
+          <div className="hero-device-mockup" style={{ border: '16px solid #222', borderRadius: '24px', boxSizing: 'border-box' }}></div>
+        </div>
+
       </div>
+
     </section>
   );
 };

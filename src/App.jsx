@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
 import CursorGlow from './components/common/CursorGlow';
 import Reveal from './components/common/Reveal';
+import Loader from './components/common/Loader';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Services from './sections/Services';
@@ -16,8 +17,12 @@ import { techStack, ctaContent } from './data/siteData';
 import './App.css';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   return (
     <div className="app-wrapper">
+      {loading && <Loader onComplete={() => setLoading(false)} />}
+
       <CursorGlow />
       <Navbar />
 
@@ -25,7 +30,7 @@ const App = () => {
         <Hero />
 
         {/* Tech Stack Marquee */}
-        <div className="marquee-container">
+        <div className="marquee-container" style={{ margin: '1.5rem 0', overflow: 'hidden' }}>
           <motion.div
             className="marquee-content"
             animate={{ x: [0, -1000] }}
@@ -34,14 +39,16 @@ const App = () => {
               repeat: Infinity,
               ease: "linear"
             }}
+            style={{ display: 'flex', gap: '4rem', padding: '0 2rem' }}
           >
-            {[...techStack, ...techStack].map((tech, i) => (
+            {Array(10).fill("Code Ka मंत्रा - Codentra").map((text, i) => (
               <motion.span
                 key={i}
                 className="marquee-item"
-                whileHover={{ color: "var(--color-primary)", scale: 1.1, opacity: 1 }}
+                whileHover={{ color: "#ffffff", scale: 1.1, opacity: 1 }}
+                style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#00E5FF', whiteSpace: 'nowrap' }}
               >
-                {tech}
+                {text}
               </motion.span>
             ))}
           </motion.div>
@@ -57,10 +64,11 @@ const App = () => {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="glass-card cta-card"
+                style={{ padding: '4rem', textAlign: 'center' }}
               >
                 <h2>{ctaContent.title}</h2>
                 <p>{ctaContent.desc}</p>
-                <a href={ctaContent.href} className="btn btn-primary">{ctaContent.btnText}</a>
+                <a href={ctaContent.href} className="btn btn-primary" style={{ display: 'inline-block', marginTop: '1rem', padding: '1rem 2rem', background: 'var(--color-blue)', borderRadius: '8px' }}>{ctaContent.btnText}</a>
               </motion.div>
             </Reveal>
           </div>
@@ -73,17 +81,6 @@ const App = () => {
       </main>
 
       <Footer />
-
-      {/* Scroll to Top */}
-      <motion.button
-        className="scroll-top glass"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.1, backgroundColor: "var(--color-primary)" }}
-      >
-        ↑
-      </motion.button>
     </div>
   );
 };
