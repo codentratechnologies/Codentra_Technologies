@@ -75,14 +75,16 @@
   flex: 1;
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 2rem 1.5rem;
   color: white;
   cursor: pointer;
   overflow: hidden;
-  min-height: 160px;
+  min-height: 220px;
+  gap: 1.5rem;
   transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -116,9 +118,6 @@
 }
 
 .stat-index {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
   font-size: 1.25rem;
   font-weight: 500;
   opacity: 0.9;
@@ -127,7 +126,17 @@
 }
 
 @media (min-width: 1024px) {
+  .stat-panel {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    min-height: 160px;
+    gap: 0;
+  }
+
   .stat-index {
+    position: absolute;
     top: 3rem;
     left: 3rem;
   }
@@ -139,9 +148,6 @@
 }
 
 .stat-content {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
   text-align: left;
   z-index: 10;
   opacity: 1;
@@ -151,6 +157,7 @@
 
 @media (min-width: 1024px) {
   .stat-content {
+    position: absolute;
     bottom: 3rem;
     left: 3rem;
     opacity: 1;
