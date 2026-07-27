@@ -1,7 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import Card from '../components/common/Card';
-import Reveal from '../components/common/Reveal';
 import { FiCpu, FiShield, FiZap, FiTarget } from 'react-icons/fi';
 import './WhyChooseUs.css';
 
@@ -13,52 +10,30 @@ const WhyChooseUs = () => {
     { icon: <FiTarget />, title: 'Strategic Engineering', desc: 'We don’t just code; we engineer solutions that align with your business objectives.' }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    },
-  };
-
   return (
-    <section className="section why-section">
-      <div className="container">
-        <Reveal width="100%">
-          <div className="section-header">
-            <span className="section-badge">The Codentra Advantage</span>
-            <h2 className="section-title">Why Global Startups <br /> <span className="text-gradient">Choose Us</span></h2>
+    <section className="why-section">
+      <div className="why-container">
+        
+        <div className="why-header">
+          <div className="why-subtitle">
+            <span className="blue-line"></span>
+            <p>THE CODENTRA ADVANTAGE</p>
           </div>
-        </Reveal>
+          <h2 className="why-title">
+            Why Global Startups <br /> Choose Us
+          </h2>
+        </div>
 
-        <motion.div
-          className="grid grid-4 why-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
+        <div className="why-grid">
           {features.map((f, i) => (
-            <motion.div key={i} variants={itemVariants}>
-              <Card className="why-card">
-                <div className="why-icon">{f.icon}</div>
-                <h3 className="why-title">{f.title}</h3>
-                <p className="why-desc">{f.desc}</p>
-              </Card>
-            </motion.div>
+            <div key={i} className="why-card">
+              <div className="why-icon">{f.icon}</div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </div>
           ))}
-        </motion.div>
+        </div>
+
       </div>
     </section>
   );

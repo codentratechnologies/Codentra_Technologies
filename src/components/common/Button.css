@@ -1,7 +1,7 @@
 .btn {
   position: relative;
-  padding: 1rem 2.5rem;
-  border-radius: 12px;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
   font-weight: 700;
   font-size: 0.875rem;
   text-transform: uppercase;
@@ -25,11 +25,11 @@
 
 .btn-content svg {
   font-size: 1.25em;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn:hover .btn-content svg {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 .btn-primary {

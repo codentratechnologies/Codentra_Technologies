@@ -1,98 +1,176 @@
 .services-section {
-  background: var(--color-bg);
-}
-
-.section-header {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 5rem;
-}
-
-.section-badge {
-  color: var(--color-primary);
-  text-transform: uppercase;
-  font-weight: 800;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  display: block;
-  margin-bottom: 1.5rem;
-}
-
-.section-title {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
-
-.section-desc {
-  color: var(--color-text-dim);
-  font-size: 1.1rem;
-}
-
-.services-grid {
-  margin-top: 4rem;
-}
-
-.service-card {
-  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 6rem 2rem;
   display: flex;
   flex-direction: column;
-}
-
-.service-icon {
-  width: 60px;
-  height: 60px;
-  background: rgba(14, 165, 233, 0.1);
-  border-radius: 16px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.75rem;
-  color: var(--color-primary);
-  margin-bottom: 2rem;
-  transition: var(--transition-base);
 }
 
-.service-card:hover .service-icon {
-  background: var(--color-primary);
-  color: #000;
-  transform: rotate(10deg) scale(1.1);
+.services-header {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
 }
 
-.service-title {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.service-text {
-  color: var(--color-text-dim);
-  font-size: 0.9375rem;
-  margin-bottom: 2rem;
-  flex-grow: 1;
-}
-
-.service-link {
+.services-header-label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8125rem;
-  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.services-header-label .dot {
+  width: 12px;
+  height: 6px;
+  background-color: #00E5FF;
+  border-radius: 9999px;
+}
+
+.services-header-label p {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #4b5563;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-primary);
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: var(--transition-base);
+  font-weight: 700;
+  margin: 0;
 }
 
-.service-card:hover .service-link {
-  opacity: 1;
-  transform: translateX(0);
+.services-header h2 {
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 700;
+  color: black;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.5rem 0;
 }
 
-@media (max-width: 768px) {
-  .service-link {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.services-desc {
+  color: #4b5563;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  margin: 0;
+}
+
+.services-cards-container {
+  width: 100%;
+  max-width: 1400px;
+  position: relative;
+  /* Extra padding to scroll through the stacked cards */
+  padding-bottom: 30vh;
+}
+
+.service-card {
+  width: 100%;
+  height: 40vh;
+  min-height: 350px;
+  max-height: 550px;
+  border-radius: 16px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.service-card-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
+  color: white;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.service-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: white;
+  opacity: 0.9;
+}
+
+.service-card-top h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.service-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 90%;
+}
+
+.service-main-desc {
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.tag-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tag-group h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tag-tech {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.visual-circle {
+  position: absolute;
+  bottom: -2rem;
+  right: -2rem;
+  width: 180px;
+  height: 180px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  z-index: 1;
 }
