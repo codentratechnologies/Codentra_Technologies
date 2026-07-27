@@ -3,12 +3,10 @@ import { stats } from '../data/siteData';
 import './About.css';
 
 const About = () => {
-  // Vibrant blue gradient colors for the stat panels
-  const panelColors = ['#00E5FF', '#1c3faa', '#102a83', '#061a5c'];
-  
   return (
     <section id="about" className="about-section">
       <div className="about-left">
+        <div className="glow-effect"></div>
         <h1 className="about-heading">
           Proven <br/>
           Results. <br/>
@@ -19,16 +17,13 @@ const About = () => {
       
       <div className="about-right">
         {stats.map((stat, idx) => (
-          <div 
-            key={idx} 
-            className="stat-panel" 
-            style={{ backgroundColor: panelColors[idx % panelColors.length] }}
-          >
+          <div key={idx} className="stat-panel">
             <div className="stat-panel-bg"></div>
             <span className="stat-index">0{idx + 1}</span>
             <div className="stat-content">
               <h2>{stat.value}</h2>
-              <p>{stat.label}</p>
+              <p className="stat-label">{stat.label}</p>
+              <p className="stat-desc">{stat.desc}</p>
             </div>
           </div>
         ))}

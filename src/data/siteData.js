@@ -20,17 +20,14 @@ export const siteConfig = {
 export const navLinks = [
   { name: 'About Us', href: '#about' },
   { name: 'Work +', href: '#projects' },
-  { name: 'Industries +', href: '#industries' },
   { name: 'Services +', href: '#services' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'FAQs', href: '#faqs' },
 ];
 
 export const stats = [
-  { value: "04", label: "Projects" },
-  { value: "12", label: "Tech stack" },
-  { value: "05", label: "Clients" },
-  { value: "01", label: "Active" },
+  { value: "04+", label: "Projects", desc: "Successfully delivered enterprise-grade applications." },
+  { value: "12+", label: "Tech Stack", desc: "Mastery in modern frameworks and scalable cloud tech." },
+  { value: "05+", label: "Happy Clients", desc: "Partnering with startups and global businesses." },
+  { value: "01+", label: "Years Active", desc: "Pushing the boundaries of digital engineering daily." },
 ];
 
 export const techStack = ['Node.js', 'Next.js', 'React.js', 'Android', 'Flutter', 'Python', 'RPA Automation', 'Firebase', 'PostgreSQL', 'MongoDB', 'AWS'];
@@ -45,43 +42,59 @@ export const ctaContent = {
 export const services = [
   {
     title: "Web Development",
-    desc: "Modern, high-performance websites built with React and cutting-edge technologies.",
-    icon: "FiMonitor"
+    desc: "We engineer modern, high-performance websites tailored to your business goals. Utilizing React and Next.js, we build scalable architectures that deliver lightning-fast load times, exceptional SEO, and seamless user experiences across all devices. Our focus on clean code and robust state management ensures that your web application remains maintainable and performs flawlessly even under heavy traffic.",
+    icon: "FiMonitor",
+    features: ["Responsive Design", "SEO Optimized", "CMS Integration"],
+    tech: ["React", "Next.js", "Node.js"]
   },
   {
     title: "Mobile App Development",
-    desc: "Cross-platform mobile applications for iOS and Android using Flutter.",
-    icon: "FiSmartphone"
+    desc: "Transform your ideas into powerful mobile applications for both iOS and Android. Using Flutter's native-compiled framework, we deliver fluid animations, custom user interfaces, and robust performance while maintaining a single, efficient codebase. We ensure offline capabilities, secure local storage, and tight integration with hardware APIs to create a truly native-feeling experience.",
+    icon: "FiSmartphone",
+    features: ["Cross-Platform", "Native Performance", "Custom UI"],
+    tech: ["Flutter", "Dart", "Firebase"]
   },
   {
     title: "Full Stack Solutions",
-    desc: "End-to-end development covering both frontend aesthetics and backend logic.",
-    icon: "FiLayers"
+    desc: "Our end-to-end development approach covers everything from stunning frontend interfaces to complex backend logic. We architect scalable, secure systems that can handle high traffic volumes and complex business workflows with complete reliability. By bridging the gap between pixel-perfect design and database optimization, we deliver holistic solutions that drive your entire digital ecosystem.",
+    icon: "FiLayers",
+    features: ["Scalable Architecture", "API Development", "Database Design"],
+    tech: ["MERN Stack", "PostgreSQL", "AWS"]
   },
   {
     title: "Python Development",
-    desc: "Robust automation scripts, data processing, and AI integrations.",
-    icon: "FiCode"
+    desc: "Leverage the power of Python to automate your most time-consuming tasks. We build robust automation scripts, intelligent data processing pipelines, and sophisticated backend systems that drive operational efficiency and uncover deep business insights. From complex web scraping mechanisms to automated reporting, we help you transform raw data into actionable business intelligence.",
+    icon: "FiCode",
+    features: ["Data Processing", "Web Scraping", "Automation"],
+    tech: ["Python", "Django", "Pandas"]
   },
   {
     title: "API Development",
-    desc: "Secure and scalable RESTful and GraphQL APIs for seamless integration.",
-    icon: "FiDatabase"
+    desc: "Connect your digital ecosystem with secure, highly scalable APIs. Whether you need RESTful architectures or flexible GraphQL endpoints, we design robust integration layers that allow your applications, databases, and third-party services to communicate flawlessly. We implement strict rate limiting, robust authentication, and comprehensive documentation to ensure seamless onboarding.",
+    icon: "FiDatabase",
+    features: ["RESTful APIs", "GraphQL", "Microservices"],
+    tech: ["Express", "FastAPI", "MongoDB"]
   },
   {
     title: "Cloud Solutions",
-    desc: "Deployment and management of applications on AWS, Azure, or Firebase.",
-    icon: "FiCloud"
+    desc: "Future-proof your infrastructure with our enterprise-grade cloud solutions. We handle the complete deployment, optimization, and management of your applications on AWS, Azure, or Firebase, ensuring high availability, impenetrable security, and seamless auto-scaling capabilities. Our DevOps practices guarantee zero-downtime deployments and continuous monitoring for ultimate peace of mind.",
+    icon: "FiCloud",
+    features: ["CI/CD Pipelines", "Serverless", "Cloud Security"],
+    tech: ["AWS", "Azure", "Docker"]
   },
   {
     title: "UI/UX Design",
-    desc: "User-centric design focus ensuring intuitive and visually stunning interfaces.",
-    icon: "FiLayout"
+    desc: "We craft visually stunning and highly intuitive interfaces rooted in deep user research. From initial wireframes to high-fidelity prototypes, our design process ensures that every interaction feels natural, engaging, and perfectly aligned with your brand identity. We prioritize accessibility and conversion-driven layouts to maximize user retention and overall business impact.",
+    icon: "FiLayout",
+    features: ["Wireframing", "Prototyping", "User Research"],
+    tech: ["Figma", "Adobe XD", "Sketch"]
   },
   {
     title: "AI Integrations",
-    desc: "Leveraging the power of AI to automate and enhance business processes.",
-    icon: "FiCpu"
+    desc: "Unlock the next level of innovation by embedding Artificial Intelligence into your products. We integrate cutting-edge machine learning models and NLP capabilities to automate complex processes, personalize user experiences, and provide powerful predictive analytics. Our bespoke AI solutions help you stay ahead of the curve by turning conversational agents and deep learning into measurable ROI.",
+    icon: "FiCpu",
+    features: ["Machine Learning", "NLP", "Predictive Analytics"],
+    tech: ["OpenAI", "TensorFlow", "PyTorch"]
   }
 ];
 

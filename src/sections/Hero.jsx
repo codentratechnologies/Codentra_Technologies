@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -11,20 +11,105 @@ const Hero = () => {
   const containerRef = useRef(null);
   const videoPinRef = useRef(null);
   const videoWrapperRef = useRef(null);
+  const videoRefs = useRef([]);
+  const lastInteractionTime = useRef(0);
+  const videos = ['/video1.mp4', '/video2.mp4', '/video3.mp4', '/video4.mp4'];
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(0);
+
+  // Keyboard and Horizontal Trackpad Navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isFullscreen) return;
+      
+      let nextIndex = currentVideo;
+      if (e.key === 'ArrowRight') {
+        nextIndex = Math.min(currentVideo + 1, videos.length - 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft') {
+        nextIndex = Math.max(currentVideo - 1, 0);
+        e.preventDefault();
+      }
+
+      if (nextIndex !== currentVideo) {
+        setCurrentVideo(nextIndex);
+      }
+    };
+
+    const handleWheel = (e) => {
+      if (!isFullscreen) return;
+      
+      // Handle horizontal swipe (trackpad)
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+        e.preventDefault();
+        
+        const now = Date.now();
+        if (now - lastInteractionTime.current < 600) return; // Debounce fast swipes
+        
+        let nextIndex = currentVideo;
+        if (e.deltaX > 0) {
+          nextIndex = Math.min(currentVideo + 1, videos.length - 1);
+        } else {
+          nextIndex = Math.max(currentVideo - 1, 0);
+        }
+
+        if (nextIndex !== currentVideo) {
+          lastInteractionTime.current = now;
+          setCurrentVideo(nextIndex);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [isFullscreen, currentVideo, videos.length]);
+
+  // Video Autoplay and Switching Logic
+  useEffect(() => {
+    videoRefs.current.forEach((vid, idx) => {
+      if (vid) {
+        if (idx === currentVideo) {
+          vid.play().catch(e => console.log('Autoplay prevented:', e));
+        } else {
+          vid.pause();
+          vid.currentTime = 0;
+        }
+      }
+    });
+  }, [currentVideo]);
+
+  const handleVideoEnded = () => {
+    if (isFullscreen) {
+      setCurrentVideo((prev) => (prev + 1) % videos.length); // Loop to next video
+    }
+  };
 
   useGSAP(() => {
-    // Pin the video container when it hits the center of the screen
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: videoPinRef.current,
         start: 'center center',
-        end: '+=150%', // Scroll for 150% of viewport height while pinned
+        end: '+=150%', // Just enough to scrub the zoom animation smoothly
         pin: true,
         scrub: 1,
+        onUpdate: (self) => {
+          // Trigger fullscreen state when the animation is mostly complete
+          if (self.progress > 0.8) {
+            setIsFullscreen(true);
+          } else {
+            setIsFullscreen(false);
+            if (currentVideo !== 0) setCurrentVideo(0); // Reset to first video when zooming out
+          }
+        }
       }
     });
 
-    // Animate the video wrapper to cover screen without scaling the actual video content
+    // Animate the video wrapper to cover screen
     tl.to(videoWrapperRef.current, {
       width: '100vw',
       height: '100vh',
@@ -32,7 +117,6 @@ const Hero = () => {
       ease: 'power1.inOut',
     }, 0);
 
-    // Also remove the border radius and border of the mockup as it goes fullscreen
     tl.to('.hero-device-mockup', {
       borderWidth: '0px',
       borderRadius: '0px',
@@ -55,10 +139,10 @@ const Hero = () => {
           <h1 className="hero-heading">
             The Digital Engineering Partner Built <br/> for What's Coming Next
           </h1>
-          <button className="hero-btn">
+          <a href="#projects" className="hero-btn" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
             Explore Work
-            <ArrowDown size={18} className="arrow-icon" />
-          </button>
+            <ArrowDown size={18} className="arrow-icon" style={{ marginLeft: '8px' }} />
+          </a>
         </div>
       </div>
 
@@ -68,14 +152,44 @@ const Hero = () => {
         {/* Video Mockup (Scales up) */}
         <div ref={videoWrapperRef} className="hero-video-wrapper">
           <div className="hero-video-inner">
-            <video 
-              src="/video1.mp4" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="hero-video"
-            ></video>
+            <div 
+              className="hero-video-slider"
+              style={{
+                display: 'flex',
+                width: `${videos.length * 100}%`,
+                height: '100%',
+                transition: 'transform 0.5s ease-in-out',
+                transform: `translateX(-${currentVideo * (100 / videos.length)}%)`
+              }}
+            >
+              {videos.map((src, idx) => (
+                <video 
+                  key={idx}
+                  ref={el => videoRefs.current[idx] = el}
+                  src={src} 
+                  autoPlay={idx === 0} 
+                  muted 
+                  playsInline
+                  onEnded={handleVideoEnded}
+                  className="hero-video"
+                  style={{ width: `${100 / videos.length}%`, height: '100%', objectFit: 'cover' }}
+                ></video>
+              ))}
+            </div>
+            
+            {/* Total Count Bar - Only visible in fullscreen */}
+            {isFullscreen && (
+              <div className="video-progress-container">
+                {videos.map((_, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`video-progress-bar ${idx === currentVideo ? 'active' : ''}`}
+                    onClick={() => setCurrentVideo(idx)} // Added click to navigate
+                    style={{ cursor: 'pointer' }}
+                  ></div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="hero-device-mockup" style={{ border: '16px solid #222', borderRadius: '24px', boxSizing: 'border-box' }}></div>
         </div>

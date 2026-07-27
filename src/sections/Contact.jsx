@@ -9,9 +9,37 @@ const Contact = () => {
       name: '', email: '', subject: '', message: ''
    });
    const [status, setStatus] = useState('idle');
+   const [errors, setErrors] = useState({});
+
+   const validateForm = () => {
+      const newErrors = {};
+      if (!formData.name.trim()) {
+         newErrors.name = 'Name is required';
+      } else if (formData.name.trim().length < 2) {
+         newErrors.name = 'Name must be at least 2 characters';
+      }
+
+      if (!formData.email.trim()) {
+         newErrors.email = 'Email is required';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+         newErrors.email = 'Please enter a valid email address';
+      }
+
+      if (!formData.message.trim()) {
+         newErrors.message = 'Message is required';
+      } else if (formData.message.trim().length < 10) {
+         newErrors.message = 'Message must be at least 10 characters';
+      }
+
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
+   };
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      
+      if (!validateForm()) return;
+
       setStatus('sending');
 
       const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -52,36 +80,48 @@ const Contact = () => {
             </div>
 
             <div className="contact-right">
-               <form ref={form} onSubmit={handleSubmit} className="contact-form">
+               <form ref={form} onSubmit={handleSubmit} className="contact-form" noValidate>
                   <div className="form-group">
                      <input
                         type="text"
                         name="name"
-                        required
                         placeholder="Your Name"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className={errors.name ? 'error-input' : ''}
+                        onChange={(e) => {
+                           setFormData({ ...formData, name: e.target.value });
+                           if (errors.name) setErrors({ ...errors, name: '' });
+                        }}
                      />
+                     {errors.name && <span className="error-message">{errors.name}</span>}
                   </div>
                   <div className="form-group">
                      <input
                         type="email"
                         name="email"
-                        required
                         placeholder="Your Email"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className={errors.email ? 'error-input' : ''}
+                        onChange={(e) => {
+                           setFormData({ ...formData, email: e.target.value });
+                           if (errors.email) setErrors({ ...errors, email: '' });
+                        }}
                      />
+                     {errors.email && <span className="error-message">{errors.email}</span>}
                   </div>
                   <div className="form-group">
                      <textarea
                         rows="4"
                         name="message"
-                        required
                         placeholder="Tell us about your project..."
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className={errors.message ? 'error-input' : ''}
+                        onChange={(e) => {
+                           setFormData({ ...formData, message: e.target.value });
+                           if (errors.message) setErrors({ ...errors, message: '' });
+                        }}
                      />
+                     {errors.message && <span className="error-message">{errors.message}</span>}
                   </div>
                   <button
                      type="submit"
