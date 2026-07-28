@@ -2,10 +2,12 @@
   width: 100%;
   background-color: #0a0a0a;
   color: white;
-  padding: 4rem 2rem;
+  padding: clamp(3rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 10;
 }
 
 .roadmap-container {
@@ -97,7 +99,7 @@
 }
 
 .bento-card-inner {
-  padding: 2.5rem 3rem;
+  padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1.5rem, 6vw, 3rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -120,7 +122,7 @@
 }
 
 .roadmap-content {
-  padding: 2rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
   border-radius: 20px;
   min-height: calc(100% - 70px);
   height: auto;
@@ -135,7 +137,7 @@
 }
 
 .bento-card-content h3 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   margin: 0 0 1.5rem 0;
   position: relative;
