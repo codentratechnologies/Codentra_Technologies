@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codentra Technologies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="loader-screen" id="loader-screen">
+
+        <!-- Deep ambient background -->
+        <canvas id="bg-canvas"></canvas>
+
+        <!-- Grid overlay -->
+        <div class="grid-overlay"></div>
+
+        <!-- ── FULL CENTER COMPOSITION ── -->
+        <div class="composition">
+
+            <!-- Logo area with rings -->
+            <div class="logo-stage" id="logo-stage">
+                <div class="ring ring-3"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-1"></div>
+                <!-- Orbiting flare dot -->
+                <div class="orbit-flare" id="orbit-flare">
+                    <div class="flare-dot"></div>
+                </div>
+                <!-- Scanner sweep -->
+                <div class="logo-scanner" id="logo-scanner"></div>
+                <div class="logo-glow" id="logo-glow"></div>
+                <div class="logo-glow logo-glow-2"></div>
+                <img src="Codentra Logo Without Text.png.png" class="logo-img" id="main-logo" alt="Codentra">
+            </div>
+
+            <!-- Brand block -->
+            <div class="brand-block">
+                <div class="brand-name" id="brand-name">
+                    <span>C</span><span>O</span><span>D</span><span>E</span><span>N</span><span>T</span><span>R</span><span>A</span>
+                </div>
+                <div class="brand-divider" id="brand-divider"></div>
+                <div class="brand-sub" id="brand-sub">TECHNOLOGIES</div>
+            </div>
+
+            <!-- Progress section — inline with content -->
+            <div class="progress-section">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-fill"></div>
+                    <div class="progress-dot" id="progress-dot"></div>
+                </div>
+                <div class="progress-footer">
+                    <div class="status-text" id="status-text">Initializing...</div>
+                    <div class="progress-label" id="progress-label">0%</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
