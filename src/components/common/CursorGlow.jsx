@@ -29,7 +29,7 @@ const CursorGlow = () => {
           pointer-events: none;
           z-index: 1;
           transform: translate(-50%, -50%);
-          transition: width 0.3s, height 0.3s;
+          transition: width var(--transition-fast), height var(--transition-fast);
         }
       `}</style>
     </div>

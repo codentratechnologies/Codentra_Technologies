@@ -15,7 +15,6 @@ const logoStage     = document.getElementById('logo-stage');
 const fill          = document.getElementById('progress-fill');
 const dot           = document.getElementById('progress-dot');
 const label         = document.getElementById('progress-label');
-const statusEl      = document.getElementById('status-text');
 const ring1         = document.querySelector('.ring-1');
 const ring2         = document.querySelector('.ring-2');
 const ring3         = document.querySelector('.ring-3');
@@ -45,31 +44,7 @@ kf.textContent = `
 }`;
 document.head.appendChild(kf);
 
-// ─────────────────────────────────────────────────
-// STATUS MESSAGES
-// ─────────────────────────────────────────────────
-const messages = [
-    { at: 0,   msg: 'Initializing system...' },
-    { at: 18,  msg: 'Loading assets...' },
-    { at: 40,  msg: 'Building experience...' },
-    { at: 68,  msg: 'Almost there...' },
-    { at: 90,  msg: 'Welcome.' },
-];
-let lastMsgIdx = -1;
 
-function updateStatus(p) {
-    let idx = 0;
-    messages.forEach((m, i) => { if (p >= m.at) idx = i; });
-    if (idx === lastMsgIdx) return;
-    lastMsgIdx = idx;
-    statusEl.style.opacity = '0';
-    setTimeout(() => {
-        statusEl.innerText    = messages[idx].msg;
-        statusEl.style.opacity = '1';
-    }, 300);
-}
-
-// ─────────────────────────────────────────────────
 // AMBIENT BACKGROUND CANVAS
 // ─────────────────────────────────────────────────
 function resizeBg() {
@@ -184,9 +159,6 @@ function applyProgress(p) {
         label.style.color = `rgba(0,210,255,${clamp((p-90)/10,0,1)})`;
     }
 
-    // ── Status text
-    statusEl.style.opacity = p > 2 ? '1' : '0';
-    updateStatus(p);
 
     // ── LOGO — starts very dim, brightens with progress
     // Uses easeOutExpo for snappy brightening near end
@@ -296,8 +268,6 @@ function hideLoader() {
 function resetAll() {
     startTime  = null;
     phaseGrid = phaseProgress = phaseRings = phaseLetters = phaseDivider = phaseSub = dotAnimating = false;
-    lastMsgIdx = -1;
-
     logo.style.cssText = 'opacity:0.06; filter:brightness(0.35); width:44px;';
     logoGlow.style.cssText      = 'opacity:0; transform:scale(0.6);';
     logoGlow2.style.opacity     = '0';
@@ -336,8 +306,6 @@ function resetAll() {
     label.style.opacity = '0';
     label.style.color   = '';
     label.innerText     = '0%';
-    statusEl.style.opacity = '0';
-
     requestAnimationFrame(tick);
 }
 

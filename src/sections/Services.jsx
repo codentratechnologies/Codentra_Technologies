@@ -19,35 +19,69 @@ const Services = () => {
 
   useGSAP(() => {
     const cards = gsap.utils.toArray('.service-card');
+    const mm = gsap.matchMedia();
     
-    cards.forEach((card, i) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: `top ${20 + (i * 2)}%`, // Stagger the pinning point slightly so they layer visibly
-        endTrigger: containerRef.current,
-        end: 'bottom bottom',
-        pin: true,
-        pinSpacing: false,
-        id: `service-card-${i}`
-      });
-      
-      // Add a scale effect to give a sense of depth
-      if (i > 0) {
-        gsap.fromTo(card,
-          { scale: 0.95, y: 100 },
-          {
-            scale: 1,
-            y: 0,
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              end: `top ${20 + (i * 2)}%`,
-              scrub: true
+    mm.add("(min-width: 769px)", () => {
+      cards.forEach((card, i) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top ${20 + (i * 2)}%`, // Stagger the pinning point slightly so they layer visibly
+          endTrigger: containerRef.current,
+          end: 'bottom bottom',
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          fastScrollEnd: true,
+          id: `service-card-${i}`
+        });
+        
+        // Add a scale effect to give a sense of depth
+        if (i > 0) {
+          gsap.fromTo(card,
+            { scale: 0.95, y: 100 },
+            {
+              scale: 1,
+              y: 0,
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                end: `top ${20 + (i * 2)}%`,
+                scrub: true,
+                fastScrollEnd: true
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      });
     });
+
+    mm.add("(max-width: 768px)", () => {
+      // 3D Coverflow horizontal scroll animation
+      cards.forEach((card, i) => {
+        gsap.set(card, { transformPerspective: 1000 });
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            scroller: ".services-cards-container",
+            horizontal: true,
+            start: "left 100%", // Enters screen from the right
+            end: "right 0%",    // Exits screen to the left
+            scrub: 1
+          }
+        });
+        
+        tl.fromTo(card, 
+          { rotateY: 25, scale: 0.8, opacity: 0.3 },
+          { rotateY: 0, scale: 1, opacity: 1, ease: "power2.out", duration: 1 }
+        )
+        .to(card, 
+          { rotateY: -25, scale: 0.8, opacity: 0.3, ease: "power2.in", duration: 1 }
+        );
+      });
+    });
+
+    return () => mm.revert();
   }, { scope: containerRef });
 
   return (

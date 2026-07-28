@@ -67,7 +67,7 @@
   color: #00E5FF;
   opacity: 0;
   transform: translateX(-10px);
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
   font-size: 18px;
 }
 
@@ -104,7 +104,7 @@
 
 .footer-legal a {
   color: rgba(255, 255, 255, 0.4);
-  transition: color 0.3s ease;
+  transition: color var(--transition-fast);
 }
 
 .footer-legal a:hover {

@@ -26,10 +26,30 @@
 .hero-heading {
   font-weight: 500;
   font-size: clamp(36px, 4.5vw, 56px);
-  line-height: 1.1;
+  line-height: 1.15;
   color: #2F363F;
   max-width: 56rem;
   letter-spacing: -0.02em;
+}
+
+.hero-dynamic-wrapper {
+  display: inline-block;
+  position: relative;
+  margin-left: 0.3em;
+}
+
+.hero-dynamic-text {
+  display: inline-block;
+  color: #00E5FF;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hero-dynamic-wrapper {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.15em;
+  }
 }
 
 .hero-btn {
@@ -40,11 +60,13 @@
   font-weight: 600;
   padding: 0.6rem 1.25rem;
   border-radius: 9999px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
-  transition: all 0.3s;
+  transition: var(--transition-fast);
   border: none;
+  text-decoration: none;
 }
 
 .hero-btn:hover {
@@ -137,7 +159,7 @@
   height: 4px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 2px;
-  transition: background 0.3s ease;
+  transition: background var(--transition-base);
 }
 
 .video-progress-bar.active {
@@ -146,34 +168,42 @@
 
 @media (max-width: 768px) {
   .hero-video-wrapper {
-    width: 95%;
+    width: 92%;
     aspect-ratio: 16 / 9;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
   }
   
   .hero-device-mockup {
-    border: clamp(4px, 1.5vw, 8px) solid #222;
-    border-radius: clamp(8px, 3vw, 12px);
+    border: 6px solid #1a1a1a;
+    border-radius: 12px;
   }
   
   .hero-video-inner {
-    border-radius: clamp(6px, 2.5vw, 10px);
+    border-radius: 8px;
   }
 
   .hero-heading {
     font-size: clamp(28px, 8vw, 36px);
   }
 
+  .hero-btn {
+    margin-top: 3rem;
+    padding: 0.875rem 2rem;
+    font-size: 15px;
+    min-width: 220px;
+  }
+
   .hero-video-pin-container {
+    height: 100dvh; /* Restore full screen height for the pinning transition to work correctly */
+    min-height: 400px;
     margin-top: -5vh;
+    padding-bottom: 0;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-video-pin-container {
-    height: auto;
-    padding: 2rem 0;
-  }
   .hero-video-wrapper {
-    aspect-ratio: 4 / 3;
+    width: 95%;
   }
 }

@@ -74,28 +74,38 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s ease;
-  opacity: 0.4;
-  transform: scale(0.95);
-}
-
-.bento-item:hover {
+  transition: var(--transition-smooth);
+  
+  /* On mobile, cards are fully visible by default. 
+     We only dim them on devices that support hover. */
   opacity: 1;
   transform: scale(1);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(20px);
-  border-color: rgba(0, 229, 255, 0.4);
-  box-shadow: 0 15px 50px rgba(0, 229, 255, 0.1);
 }
 
-.bento-item:hover .bento-glow {
-  opacity: 1;
-  transform: scale(1.2);
-}
+@media (hover: hover) {
+  .bento-item {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
 
-.bento-item:hover .bento-num {
-  opacity: 0.06;
-  color: #00E5FF;
+  .bento-item:hover {
+    opacity: 1;
+    transform: scale(1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(20px);
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0 15px 50px rgba(0, 229, 255, 0.1);
+  }
+
+  .bento-item:hover .bento-glow {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  .bento-item:hover .bento-num {
+    opacity: 0.06;
+    color: #00E5FF;
+  }
 }
 
 .bento-card-inner {
@@ -184,5 +194,5 @@
   z-index: 1;
   pointer-events: none;
   opacity: 0;
-  transition: all 0.6s ease;
+  transition: var(--transition-smooth);
 }
