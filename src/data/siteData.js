@@ -101,12 +101,13 @@ export const services = [
 export const projectsData = [
   {
     title: "Creative Canvas",
-    desc: "A vibrant digital portfolio and artistic brand by Drashti Gajera, showcasing creative expressions, digital artistry, and visual storytelling.",
+    desc: "Premium Handcrafted Resin Art & Kasab Embroidery. Shop unique handmade products from India.",
     statValue: "500+",
     statLabel: "Community",
     statValue2: "130+",
     statLabel2: "Creations",
-    image: "/images/creative_canvas.png"
+    image: "/images/creative_canvas.png",
+    link: "https://creativecanvas-26.vercel.app/"
   },
   {
     title: "Aura Finance",
