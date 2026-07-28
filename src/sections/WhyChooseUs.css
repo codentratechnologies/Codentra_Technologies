@@ -1,7 +1,7 @@
 .why-section {
   width: 100%;
   background-color: #0a0a0a;
-  padding: 8rem 0;
+  padding: clamp(4rem, 10vw, 8rem) 0;
   color: white;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
 .why-container {
   width: 100%;
   max-width: 1600px;
-  padding: 0 3rem;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
 }
 
 .why-header {
@@ -50,7 +50,7 @@
 .why-card {
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 2.5rem 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem);
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;

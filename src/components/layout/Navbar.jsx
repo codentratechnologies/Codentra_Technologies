@@ -107,7 +107,7 @@ const Navbar = () => {
         ))}
         <a 
           href="#contact" 
-          style={{ marginTop: '1rem', backgroundColor: '#00E5FF', color: 'white', fontSize: '1.125rem', fontWeight: 'bold', padding: '1rem 3rem', borderRadius: '0.75rem' }}
+          style={{ marginTop: '1rem', backgroundColor: '#00E5FF', color: 'white', fontSize: '1.125rem', fontWeight: 'bold', padding: '1rem clamp(1.5rem, 5vw, 3rem)', borderRadius: '0.75rem' }}
           onClick={() => setMobileMenuOpen(false)}
         >
           Contact Us

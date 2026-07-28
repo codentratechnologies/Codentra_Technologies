@@ -103,7 +103,7 @@ const Hero = () => {
             setIsFullscreen(true);
           } else {
             setIsFullscreen(false);
-            if (currentVideo !== 0) setCurrentVideo(0); // Reset to first video when zooming out
+            setCurrentVideo(0); // Reset to first video when zooming out
           }
         }
       }
@@ -166,7 +166,7 @@ const Hero = () => {
                 <video 
                   key={idx}
                   ref={el => videoRefs.current[idx] = el}
-                  src={src} 
+                  src={isFullscreen || idx === 0 ? src : ""} 
                   autoPlay={idx === 0} 
                   muted 
                   playsInline

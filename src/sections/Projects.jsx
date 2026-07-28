@@ -19,7 +19,7 @@ const Projects = () => {
         trigger: card,
         start: 'top 15%', // Pin when the card hits 15% from top
         endTrigger: containerRef.current,
-        end: 'bottom bottom',
+        end: 'bottom top',
         pin: true,
         pinSpacing: false, // Don't add spacing so they overlap
         id: `card-${i}`
@@ -67,21 +67,49 @@ const Projects = () => {
               <p>{project.desc}</p>
               
               <div className="work-card-stats">
-                <div className="stat-item">
-                  <h4>{project.statValue}</h4>
-                  <p>{project.statLabel}</p>
-                </div>
-                <div className="divider"></div>
-                <div className="stat-item">
-                  <h4>{project.statValue2}</h4>
-                  <p>{project.statLabel2}</p>
-                </div>
+                {project.statValue && (
+                  <div className="stat-item">
+                    <h4>{project.statValue}</h4>
+                    <p>{project.statLabel}</p>
+                  </div>
+                )}
+                {project.statValue && project.statValue2 && (
+                  <div className="divider"></div>
+                )}
+                {project.statValue2 && (
+                  <div className="stat-item">
+                    <h4>{project.statValue2}</h4>
+                    <p>{project.statLabel2}</p>
+                  </div>
+                )}
               </div>
+              
+              {project.link && (
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="project-external-link"
+                >
+                  Visit Website
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px' }}>
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              )}
             </div>
             
             <div className="work-card-right">
-              {/* Placeholder image for mockup */}
-              <div className="mockup-placeholder"></div>
+              {project.image ? (
+                <img 
+                  src={project.image} 
+                  alt={`${project.title} mockup`}
+                  className="mockup-image"
+                />
+              ) : (
+                <div className="mockup-placeholder"></div>
+              )}
             </div>
           </div>
         ))}
