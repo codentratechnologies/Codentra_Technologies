@@ -94,8 +94,16 @@
   animation: scrollTestimonials 30s linear infinite;
 }
 
-.testimonials-track:hover {
-  animation-play-state: paused;
+/* Only allow hover-pausing on devices that support mouse hover */
+@media (hover: hover) {
+  .testimonials-track:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Explicit pause state toggled by React on click/touch */
+.testimonials-track.is-paused {
+  animation-play-state: paused !important;
 }
 
 @keyframes scrollTestimonials {

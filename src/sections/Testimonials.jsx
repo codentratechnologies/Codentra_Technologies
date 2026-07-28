@@ -4,6 +4,12 @@ import { FiMessageSquare } from 'react-icons/fi';
 import './Testimonials.css';
 
 const Testimonials = () => {
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  const handleInteraction = () => {
+    setIsPaused(!isPaused);
+  };
+
   return (
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-container">
@@ -17,7 +23,10 @@ const Testimonials = () => {
         </div>
 
         <div className="testimonials-marquee">
-          <div className="testimonials-track">
+          <div 
+            className={`testimonials-track ${isPaused ? 'is-paused' : ''}`}
+            onClick={handleInteraction}
+          >
             {[...testimonialsData, ...testimonialsData, ...testimonialsData, ...testimonialsData].map((testimonial, i) => (
               <div key={i} className="testimonial-card">
                 <div className="testimonial-icon"><FiMessageSquare /></div>

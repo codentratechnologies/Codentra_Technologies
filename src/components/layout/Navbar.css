@@ -4,13 +4,28 @@
   left: 0;
   width: 100%;
   height: 80px;
-  /* Approximate navbar height */
   z-index: 99;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   pointer-events: none;
+  transition: background var(--transition-base), border-color var(--transition-base), backdrop-filter var(--transition-base);
+}
+
+.navbar-glass-transparent {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+.navbar-glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar-glass-dark {
+  background: rgba(11, 17, 32, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar-wrapper {
@@ -22,7 +37,7 @@
   padding: 1rem 0;
   color: white;
   pointer-events: none;
-  transition: color 0.3s ease;
+  transition: color var(--transition-fast);
 }
 
 .navbar-dark-text {
@@ -49,6 +64,8 @@
   padding: 0;
   z-index: 1000;
   color: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .navbar-hamburger span {
@@ -56,7 +73,7 @@
   width: 100%;
   height: 2px;
   background-color: currentColor;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
 .navbar-logo-img {
@@ -133,7 +150,7 @@
   font-size: 15px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
-  transition: color 0.3s;
+  transition: color var(--transition-fast);
 }
 
 .navbar-link:hover {
@@ -158,7 +175,7 @@
   border: none;
   background: #00E5FF;
   color: white;
-  transition: all 0.2s;
+  transition: all var(--transition-fast);
 }
 
 @media (min-width: 768px) {

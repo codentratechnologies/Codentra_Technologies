@@ -5,10 +5,11 @@ import './Navbar.css';
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLightBackground, setIsLightBackground] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     // Classes known to have a white/light background
-    const lightClasses = ['about-section', 'services-section', 'projects-section', 'testimonials-section'];
+    const lightClasses = ['services-section', 'projects-section', 'testimonials-section'];
 
     const handleScroll = () => {
       // Query sections dynamically in case they are rendered after navbar
@@ -28,15 +29,14 @@ const Navbar = () => {
 
       if (currentSection) {
         if (currentSection.classList.contains('hero-wrapper')) {
-           // Hero is light until the dark overlay fades in significantly
-           // Pin starts after text (~40vh), timeline is 150vh. Dark overlay starts at 30% of 150vh = 45vh.
-           // Total scroll to dark start: ~85vh. Full dark: ~160vh. We switch text color around 120vh.
            setIsLightBackground(window.scrollY < window.innerHeight * 1.2);
         } else {
            const isLight = lightClasses.some(c => currentSection.classList.contains(c));
            setIsLightBackground(isLight);
         }
       }
+      
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -46,10 +46,53 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle browser back button to close menu intuitively
+  useEffect(() => {
+    const handlePopState = (e) => {
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      window.history.pushState({ menuOpen: true }, '');
+      window.addEventListener('popstate', handlePopState);
+    }
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [mobileMenuOpen]);
+
+  const handleHamburgerClick = () => {
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+      // Only navigate back if the user manually clicks the X
+      if (window.history.state && window.history.state.menuOpen) {
+        window.history.back();
+      }
+    } else {
+      setMobileMenuOpen(true);
+    }
+  };
+
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+    // If they click a link, clean up the history state so pressing back later doesn't reopen the menu,
+    // but DO NOT call history.back() because we want the anchor link to successfully navigate!
+    if (window.history.state && window.history.state.menuOpen) {
+      window.history.replaceState({}, '');
+    }
+  };
+
+  const glassClass = !isScrolled 
+    ? 'navbar-glass-transparent' 
+    : (isLightBackground ? 'navbar-glass-light' : 'navbar-glass-dark');
+
   return (
     <>
-      <div className="navbar-glass-bg"></div>
-      <header className={`navbar-wrapper ${isLightBackground ? 'navbar-dark-text' : ''}`}>
+      <div className={`navbar-glass-bg ${glassClass}`}></div>
+      <header className={`navbar-wrapper ${isLightBackground && !mobileMenuOpen ? 'navbar-dark-text' : ''}`}>
         <div className="navbar-container">
           <div className="navbar-logo-area">
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
@@ -69,11 +112,11 @@ const Navbar = () => {
             <a href="#contact" className="navbar-contact-btn">Contact Us</a>
             <button 
               className="navbar-hamburger" 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={handleHamburgerClick}
             >
-              <span style={{ transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }}></span>
+              <span style={{ transform: mobileMenuOpen ? 'translateY(9px) rotate(45deg)' : 'none' }}></span>
               <span style={{ opacity: mobileMenuOpen ? 0 : 1 }}></span>
-              <span style={{ transform: mobileMenuOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'none' }}></span>
+              <span style={{ transform: mobileMenuOpen ? 'translateY(-9px) rotate(-45deg)' : 'none' }}></span>
             </button>
           </div>
         </div>
@@ -91,7 +134,7 @@ const Navbar = () => {
           alignItems: 'center', 
           justifyContent: 'center', 
           gap: '2rem',
-          transition: 'transform 0.5s ease-in-out',
+          transition: 'transform var(--transition-smooth)',
           transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-100%)'
         }}
       >
@@ -99,16 +142,16 @@ const Navbar = () => {
           <a 
             key={link.name} 
             href={link.href} 
-            style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}
-            onClick={() => setMobileMenuOpen(false)}
+            style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', textDecoration: 'none' }}
+            onClick={handleLinkClick}
           >
             {link.name}
           </a>
         ))}
         <a 
           href="#contact" 
-          style={{ marginTop: '1rem', backgroundColor: '#00E5FF', color: 'white', fontSize: '1.125rem', fontWeight: 'bold', padding: '1rem clamp(1.5rem, 5vw, 3rem)', borderRadius: '0.75rem' }}
-          onClick={() => setMobileMenuOpen(false)}
+          style={{ marginTop: '1rem', backgroundColor: '#00E5FF', color: 'black', fontSize: '1.125rem', fontWeight: 'bold', padding: '1rem clamp(1.5rem, 5vw, 3rem)', borderRadius: '0.75rem', textDecoration: 'none' }}
+          onClick={handleLinkClick}
         >
           Contact Us
         </a>

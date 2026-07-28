@@ -13,35 +13,67 @@ const Projects = () => {
   useGSAP(() => {
     const cards = gsap.utils.toArray('.work-card');
     
-    // Create the stacked pinning effect
-    cards.forEach((card, i) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 15%', // Pin when the card hits 15% from top
-        endTrigger: containerRef.current,
-        end: 'bottom top',
-        pin: true,
-        pinSpacing: false, // Don't add spacing so they overlap
-        id: `card-${i}`
-      });
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 769px)", () => {
+      // Create the stacked pinning effect ONLY on desktop
+      cards.forEach((card, i) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 15%', // Pin when the card hits 15% from top
+          endTrigger: containerRef.current,
+          end: 'bottom top',
+          pin: true,
+          pinSpacing: false, // Don't add spacing so they overlap
+          id: `card-${i}`
+        });
 
-      // Optional: Add a slight scale down or darken effect to cards behind
-      if (i > 0) {
-        gsap.fromTo(card, 
-          { y: 100, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 80%',
-              end: 'top 20%',
-              scrub: true
+        // Optional: Add a slight scale down or darken effect to cards behind
+        if (i > 0) {
+          gsap.fromTo(card, 
+            { y: 100, opacity: 0 },
+            { 
+              y: 0, 
+              opacity: 1, 
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 80%',
+                end: 'top 20%',
+                scrub: true
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      });
     });
+
+    mm.add("(max-width: 768px)", () => {
+      // 3D Coverflow horizontal scroll animation
+      cards.forEach((card, i) => {
+        gsap.set(card, { transformPerspective: 1000 });
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            scroller: ".projects-cards-container",
+            horizontal: true,
+            start: "left 100%", // Enters screen from the right
+            end: "right 0%",    // Exits screen to the left
+            scrub: 1
+          }
+        });
+        
+        tl.fromTo(card, 
+          { rotateY: 25, scale: 0.8, opacity: 0.3 },
+          { rotateY: 0, scale: 1, opacity: 1, ease: "power2.out", duration: 1 }
+        )
+        .to(card, 
+          { rotateY: -25, scale: 0.8, opacity: 0.3, ease: "power2.in", duration: 1 }
+        );
+      });
+    });
+
+    return () => mm.revert();
 
   }, { scope: containerRef });
 
@@ -56,7 +88,6 @@ const Projects = () => {
         <p className="projects-desc">
           Codentra Technologies is a people-first technology company focused on building innovative digital solutions that care about your business growth and product success as much as you do.
         </p>
-        <a href="#contact" className="view-all-btn">View All Projects</a>
       </div>
 
       <div className="projects-cards-container">
