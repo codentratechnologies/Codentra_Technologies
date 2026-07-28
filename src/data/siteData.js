@@ -101,35 +101,33 @@ export const services = [
 export const projectsData = [
   {
     title: "Creative Canvas",
-    desc: "A creative and modern digital platform with interactive UI/UX and smooth user experience.",
-    statValue: "+45%",
-    statLabel: "Engagement",
-    statValue2: "2x",
-    statLabel2: "Faster Load"
+    desc: "A vibrant digital portfolio and artistic brand by Drashti Gajera, showcasing creative expressions, digital artistry, and visual storytelling.",
+    statValue: "500+",
+    statLabel: "Community",
+    statValue2: "130+",
+    statLabel2: "Creations",
+    image: "/images/creative_canvas.png"
   },
   {
     title: "Aura Finance",
-    desc: "A finance and share market management platform with analytics, dashboards, and business financial workflows.",
-    statValue: "$2M+",
-    statLabel: "Processed",
+    desc: "An intelligent, AI-powered financial dashboard delivering real-time market data, sentiment analysis, and personalized insights.",
+    statValue: "$128k+",
+    statLabel: "Portfolio Value",
+    statValue2: "78",
+    statLabel2: "AI Sentiment",
+    image: "/images/aura_finance.png",
+    link: "https://auraafinance.vercel.app/"
+  },
+
+  {
+    title: "Pramukh Scrap",
+    desc: "A comprehensive digital platform for seamless scrap trading, recycling management, and sustainable business operations.",
+    statValue: "50%",
+    statLabel: "Efficiency",
     statValue2: "100%",
-    statLabel2: "Secure"
-  },
-  {
-    title: "Eventia App",
-    desc: "An event management platform with mobile application and admin dashboard for booking, event handling, and customer management.",
-    statValue: "10k+",
-    statLabel: "Users",
-    statValue2: "4.9",
-    statLabel2: "App Rating"
-  },
-  {
-    title: "Nexora CRM",
-    desc: "A customer relationship management system for lead tracking, sales automation, and workflow management.",
-    statValue: "30%",
-    statLabel: "Sales Growth",
-    statValue2: "5h",
-    statLabel2: "Saved/Week"
+    statLabel2: "Sustainable",
+    image: "/images/pramukh.png",
+    link: "https://www.pramukhscrap.in/"
   }
 ];
 
