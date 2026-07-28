@@ -161,6 +161,8 @@
     min-width: 85vw;
     scroll-snap-align: center;
     margin-bottom: 0;
+    flex-direction: column-reverse; /* Image on top */
+    box-shadow: 0 20px 40px -15px rgba(0, 229, 255, 0.08);
   }
 }
 
@@ -289,43 +291,115 @@
 }
 
 @media (max-width: 768px) {
+  .work-card {
+    min-width: 85vw;
+    scroll-snap-align: center;
+    margin-bottom: 0;
+    flex-direction: column-reverse; /* Puts image at top */
+    background-color: #0d1116;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    height: auto;
+    min-height: auto;
+    overflow: hidden;
+  }
+  
+  .work-card-right {
+    width: 100%;
+    height: 240px;
+    min-height: 240px;
+    padding: 0;
+    position: relative;
+    display: block;
+  }
+  
+  .mockup-image, .mockup-placeholder {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0;
+  }
+  
   .work-card-left {
-    padding: 2rem 1.5rem 1.5rem;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
   }
   
   .work-card-left h3 {
-    font-size: 28px;
-    margin-bottom: 1rem;
+    font-size: 26px;
+    margin-bottom: 0.5rem;
+    color: white;
   }
   
   .work-card-left p {
     font-size: 14px;
     margin-bottom: 1.5rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    display: block;
   }
   
   .work-card-stats {
-    gap: 1rem;
-    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0;
     width: 100%;
     justify-content: flex-start;
+    background: transparent;
+    border: none;
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat-item {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
+    border: none;
   }
   
   .stat-item h4 {
     font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.1rem;
+  }
+  
+  .stat-item p {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+  
+  .divider {
+    width: 1px;
+    height: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: block;
   }
   
   .project-external-link {
-    margin-top: 1.5rem;
+    margin-top: 0;
+    width: fit-content;
+    justify-content: flex-start;
+    background: transparent;
+    color: #00E5FF;
+    border: none;
+    padding: 0;
+    font-weight: 600;
   }
   
-  .work-card-right {
-    padding-top: 2rem;
-    min-height: 250px;
-    overflow: hidden;
-  }
-  
-  .mockup-image, .mockup-placeholder {
-    width: 90%;
-    max-height: 250px;
+  .project-external-link:hover {
+    background: transparent;
+    color: white;
+    text-decoration: underline;
   }
 }
