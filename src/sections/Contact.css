@@ -36,9 +36,10 @@
 .contact-heading {
   font-size: clamp(48px, 5vw, 72px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.2;
   letter-spacing: -0.025em;
   margin-bottom: 2.5rem;
+  padding-bottom: 0.1em;
   background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -114,7 +115,7 @@
   font-family: inherit;
   font-size: 16px;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: var(--transition-fast);
   box-sizing: border-box;
 }
 
@@ -156,7 +157,7 @@
   margin-top: 1rem;
   border: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-fast);
   box-shadow: 0 10px 20px -10px rgba(0, 229, 255, 0.5);
 }
 

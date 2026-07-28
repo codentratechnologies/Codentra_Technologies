@@ -8,7 +8,6 @@ const loaderScript = () => {
     const fill          = document.getElementById('progress-fill');
     const dot           = document.getElementById('progress-dot');
     const label         = document.getElementById('progress-label');
-    const statusEl      = document.getElementById('status-text');
     const ring1         = document.querySelector('.ring-1');
     const ring2         = document.querySelector('.ring-2');
     const ring3         = document.querySelector('.ring-3');
@@ -38,26 +37,7 @@ const loaderScript = () => {
     }`;
     document.head.appendChild(kf);
 
-    const messages = [
-        { at: 0,   msg: 'Initializing system...' },
-        { at: 18,  msg: 'Loading assets...' },
-        { at: 40,  msg: 'Building experience...' },
-        { at: 68,  msg: 'Almost there...' },
-        { at: 90,  msg: 'Welcome.' },
-    ];
-    let lastMsgIdx = -1;
 
-    function updateStatus(p) {
-        let idx = 0;
-        messages.forEach((m, i) => { if (p >= m.at) idx = i; });
-        if (idx === lastMsgIdx) return;
-        lastMsgIdx = idx;
-        statusEl.style.opacity = '0';
-        setTimeout(() => {
-            statusEl.innerText    = messages[idx].msg;
-            statusEl.style.opacity = '1';
-        }, 300);
-    }
 
     function resizeBg() {
         bgCanvas.width  = window.innerWidth;
@@ -153,9 +133,6 @@ const loaderScript = () => {
         if (p >= 90) {
             label.style.color = `rgba(0,210,255,${clamp((p-90)/10,0,1)})`;
         }
-
-        statusEl.style.opacity = p > 2 ? '1' : '0';
-        updateStatus(p);
 
         const logoEase     = easeOutExpo(r);
         const logoOpacity  = clamp(0.06 + logoEase * 0.94, 0.06, 1);

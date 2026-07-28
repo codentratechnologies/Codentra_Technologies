@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { ArrowDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Hero.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,8 +15,18 @@ const Hero = () => {
   const videoRefs = useRef([]);
   const lastInteractionTime = useRef(0);
   const videos = ['/video1.mp4', '/video2.mp4', '/video3.mp4', '/video4.mp4'];
+  const taglines = ["What's Coming Next", "Scale", "Innovation", "The Future"];
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(0);
+  const [taglineIdx, setTaglineIdx] = useState(0);
+
+  // Tagline Rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTaglineIdx((prev) => (prev + 1) % taglines.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Keyboard and Horizontal Trackpad Navigation
   useEffect(() => {
@@ -110,6 +121,7 @@ const Hero = () => {
     });
 
     // Animate the video wrapper to cover screen
+    // On mobile, animating to 100vh causes cropping, but we restore it and fix it in CSS
     tl.to(videoWrapperRef.current, {
       width: '100vw',
       height: '100vh',
@@ -137,11 +149,28 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-text-container">
           <h1 className="hero-heading">
-            The Digital Engineering Partner Built <br/> for What's Coming Next
+            The Digital Engineering Partner Built for
+            <span className="hero-dynamic-wrapper">
+              <AnimatePresence mode="popLayout">
+                <motion.span
+                  key={taglineIdx}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ 
+                    y: { type: "spring", stiffness: 400, damping: 35 }, 
+                    opacity: { duration: 0.25 } 
+                  }}
+                  className="hero-dynamic-text"
+                >
+                  {taglines[taglineIdx]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
           </h1>
-          <a href="#projects" className="hero-btn" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+          <a href="#projects" className="hero-btn">
             Explore Work
-            <ArrowDown size={18} className="arrow-icon" style={{ marginLeft: '8px' }} />
+            <ArrowDown size={18} className="arrow-icon" />
           </a>
         </div>
       </div>
@@ -158,7 +187,7 @@ const Hero = () => {
                 display: 'flex',
                 width: `${videos.length * 100}%`,
                 height: '100%',
-                transition: 'transform 0.5s ease-in-out',
+                transition: 'transform var(--transition-smooth)',
                 transform: `translateX(-${currentVideo * (100 / videos.length)}%)`
               }}
             >
@@ -166,7 +195,8 @@ const Hero = () => {
                 <video 
                   key={idx}
                   ref={el => videoRefs.current[idx] = el}
-                  src={isFullscreen || idx === 0 ? src : ""} 
+                  src={src} 
+                  preload={idx === 0 ? "auto" : "metadata"}
                   autoPlay={idx === 0} 
                   muted 
                   playsInline

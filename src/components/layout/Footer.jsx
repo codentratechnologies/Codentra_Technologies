@@ -47,7 +47,6 @@ const Footer = () => {
             <h4>Company</h4>
             <a href="#about"><FiArrowRight className="footer-arrow" /> About Us</a>
             <a href="#projects"><FiArrowRight className="footer-arrow" /> Our Work</a>
-            <a href="#careers"><FiArrowRight className="footer-arrow" /> Careers</a>
             <a href="#contact"><FiArrowRight className="footer-arrow" /> Contact</a>
           </div>
 
