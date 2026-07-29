@@ -2,6 +2,7 @@
   width: 100%;
   background-color: #ffffff;
   padding: clamp(4rem, 10vw, 6rem) clamp(1rem, 5vw, 2rem);
+  padding-bottom: 15vh; /* Extra spacing after the last card */
   display: flex;
   flex-direction: column;
   align-items: center;
