@@ -64,6 +64,7 @@ button {
   align-items: center;
   text-align: center;
   margin-bottom: 4rem;
+  margin-inline: auto;
 }
 
 .section-header-label {
