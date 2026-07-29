@@ -79,6 +79,40 @@
   backface-visibility: hidden;
 }
 
+.service-card-bg-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.service-bg-icon {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  font-size: 25rem;
+  color: rgba(255, 255, 255, 0.04);
+  transform: rotate(-10deg);
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-bg-icon {
+  transform: rotate(0deg) scale(1.05);
+  color: rgba(255, 255, 255, 0.07);
+}
+
+.service-bg-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+}
 
 .service-card-content {
   width: 100%;

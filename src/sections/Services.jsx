@@ -83,6 +83,12 @@ const Services = () => {
                 zIndex: idx + 1
               }}
             >
+              {/* Dynamic Background UI based on content */}
+              <div className="service-card-bg-ui">
+                {Icon && <Icon className="service-bg-icon" />}
+                <div className="service-bg-gradient"></div>
+              </div>
+              
               <div className="service-card-content">
                 <div className="service-card-top">
                   {Icon && <Icon className="service-icon" />}
