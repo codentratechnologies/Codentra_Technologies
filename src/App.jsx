@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/layout/Navbar';
 import CursorGlow from './components/common/CursorGlow';
 import Reveal from './components/common/Reveal';
 
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+ScrollTrigger.normalizeScroll(true);
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Services from './sections/Services';

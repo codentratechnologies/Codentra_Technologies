@@ -19,7 +19,8 @@
   align-items: center;
   text-align: center;
   z-index: 30;
-  padding: clamp(5rem, 15vh, 8rem) clamp(1rem, 5vw, 1.5rem) 1rem clamp(1rem, 5vw, 1.5rem); /* Reduced bottom padding from 4rem to 1rem */
+  padding: clamp(5rem, 15vh, 8rem) clamp(1rem, 5vw, 1.5rem) 1rem clamp(1rem, 5vw, 1.5rem);
+  /* Reduced bottom padding from 4rem to 1rem */
   width: 100%;
 }
 
@@ -53,19 +54,20 @@
 }
 
 .hero-btn {
-  margin-top: 2rem;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
   background: #00E5FF;
   color: white;
-  font-size: 14px;
+  font-size: clamp(14px, 1.5vw, 18px);
   font-weight: 600;
-  padding: 0.6rem 1.25rem;
+  padding: clamp(0.75rem, 1.5vw, 1.2rem) clamp(1.5rem, 3vw, 2.5rem);
   border-radius: 9999px;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  transition: var(--transition-fast);
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  transition: all 0.3s;
   border: none;
+  text-decoration: none;
   text-decoration: none;
 }
 
@@ -78,10 +80,13 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(-10%);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
+
   50% {
     transform: translateY(10%);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -97,7 +102,8 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  margin-top: -15vh; /* Pull container up to reduce visual gap */
+  margin-top: -15vh;
+  /* Pull container up to reduce visual gap */
 }
 
 .hero-video-wrapper {
@@ -112,7 +118,8 @@
 .hero-video-inner {
   position: absolute;
   overflow: hidden;
-  border-radius: 20px; /* Slightly smaller than the 24px border radius of the mockup */
+  border-radius: 20px;
+  /* Slightly smaller than the 24px border radius of the mockup */
   z-index: 0;
   top: 0;
   left: 0;
@@ -173,12 +180,12 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
   }
-  
+
   .hero-device-mockup {
     border: 6px solid #1a1a1a;
     border-radius: 12px;
   }
-  
+
   .hero-video-inner {
     border-radius: 8px;
   }
@@ -195,7 +202,8 @@
   }
 
   .hero-video-pin-container {
-    height: 100dvh; /* Restore full screen height for the pinning transition to work correctly */
+    height: 100dvh;
+    /* Restore full screen height for the pinning transition to work correctly */
     min-height: 400px;
     margin-top: -5vh;
     padding-bottom: 0;

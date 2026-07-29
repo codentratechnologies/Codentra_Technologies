@@ -12,9 +12,9 @@ const Projects = () => {
 
   useGSAP(() => {
     const cards = gsap.utils.toArray('.work-card');
-    
+
     const mm = gsap.matchMedia();
-    
+
     mm.add("all", () => {
       // Create the stacked pinning effect on all devices
       cards.forEach((card, i) => {
@@ -30,11 +30,11 @@ const Projects = () => {
 
         // Optional: Add a slight scale down or darken effect to cards behind
         if (i > 0) {
-          gsap.fromTo(card, 
+          gsap.fromTo(card,
             { y: 100, opacity: 0 },
-            { 
-              y: 0, 
-              opacity: 1, 
+            {
+              y: 0,
+              opacity: 1,
               scrollTrigger: {
                 trigger: card,
                 start: 'top 80%',
@@ -70,7 +70,7 @@ const Projects = () => {
             <div className="work-card-left">
               <h3>{project.title}</h3>
               <p>{project.desc}</p>
-              
+
               <div className="work-card-stats">
                 {project.statValue && (
                   <div className="stat-item">
@@ -88,11 +88,11 @@ const Projects = () => {
                   </div>
                 )}
               </div>
-              
+
               {project.link && (
-                <a 
-                  href={project.link} 
-                  target="_blank" 
+                <a
+                  href={project.link}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="project-external-link"
                 >
@@ -104,11 +104,11 @@ const Projects = () => {
                 </a>
               )}
             </div>
-            
+
             <div className="work-card-right">
               {project.image ? (
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={`${project.title} mockup`}
                   className="mockup-image"
                 />

@@ -129,6 +129,16 @@ export const projectsData = [
     statLabel2: "Sustainable",
     image: "/images/pramukh.png",
     link: "https://www.pramukhscrap.in/"
+  },
+  {
+    title: "Radhe Shyam Furniture",
+    desc: "An elegant e-commerce and showcase platform designed for premium handcrafted furniture and modern interiors.",
+    statValue: "200+",
+    statLabel: "Products",
+    statValue2: "100%",
+    statLabel2: "Craftsmanship",
+    image: "/images/radhe_shyam.png",
+    link: "#"
   }
 ];
 

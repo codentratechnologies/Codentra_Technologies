@@ -20,7 +20,7 @@ const Services = () => {
   useGSAP(() => {
     const cards = gsap.utils.toArray('.service-card');
     const mm = gsap.matchMedia();
-    
+
     mm.add("all", () => {
       cards.forEach((card, i) => {
         ScrollTrigger.create({
@@ -34,7 +34,7 @@ const Services = () => {
           fastScrollEnd: true,
           id: `service-card-${i}`
         });
-        
+
         // Add a scale effect to give a sense of depth
         if (i > 0) {
           gsap.fromTo(card,
@@ -65,7 +65,7 @@ const Services = () => {
           <span className="dot"></span>
           <p>Our Services</p>
         </div>
-        <h2>From architecture design <br/>to AI-powered platforms</h2>
+        <h2>From architecture design <br />to AI-powered platforms</h2>
         <p className="services-desc">
           we design and build software for the future.
         </p>
@@ -75,10 +75,10 @@ const Services = () => {
         {services.map((service, idx) => {
           const Icon = FiIcons[service.icon];
           return (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="service-card"
-              style={{ 
+              style={{
                 backgroundColor: cardColors[idx % cardColors.length],
                 zIndex: idx + 1
               }}
@@ -88,10 +88,10 @@ const Services = () => {
                   {Icon && <Icon className="service-icon" />}
                   <h3>{service.title}</h3>
                 </div>
-                
+
                 <div className="service-card-bottom">
                   <p className="service-main-desc">{service.desc}</p>
-                  
+
                   <div className="service-tags">
                     {service.features && service.features.length > 0 && (
                       <div className="tag-group">
@@ -103,7 +103,7 @@ const Services = () => {
                         </div>
                       </div>
                     )}
-                    
+
                     {service.tech && service.tech.length > 0 && (
                       <div className="tag-group">
                         <h4>Technologies</h4>
