@@ -14,11 +14,24 @@ const Hero = () => {
   const videoWrapperRef = useRef(null);
   const videoRefs = useRef([]);
   const lastInteractionTime = useRef(0);
-  const videos = ['/video1.mp4', '/video2.mp4', '/video3.mp4', '/video4.mp4'];
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+  const videos = [
+    isMobileDevice ? '/video4_mobile.mp4' : '/video4.mp4',
+    '/video1.mp4', 
+    '/video2.mp4', 
+    '/video3.mp4'
+  ];
   const taglines = ["What's Coming Next", "Scale", "Innovation", "The Future"];
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(0);
   const [taglineIdx, setTaglineIdx] = useState(0);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobileDevice(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Tagline Rotation
   useEffect(() => {
@@ -110,12 +123,18 @@ const Hero = () => {
         scrub: 1,
         onUpdate: (self) => {
           // Trigger fullscreen state when the animation is mostly complete
-          if (self.progress > 0.8) {
-            setIsFullscreen(true);
-          } else {
-            setIsFullscreen(false);
-            setCurrentVideo(0); // Reset to first video when zooming out
-          }
+          const isFull = self.progress > 0.8;
+          setIsFullscreen(prev => {
+            if (prev !== isFull) {
+              // Reset video system when switching states
+              setCurrentVideo(0);
+              if (videoRefs.current[0]) {
+                videoRefs.current[0].currentTime = 0;
+                videoRefs.current[0].play().catch(e => console.log(e));
+              }
+            }
+            return isFull;
+          });
         }
       }
     });
@@ -185,15 +204,15 @@ const Hero = () => {
               className="hero-video-slider"
               style={{
                 display: 'flex',
-                width: `${videos.length * 100}%`,
+                width: `${(isFullscreen ? videos.length : 1) * 100}%`,
                 height: '100%',
                 transition: 'transform var(--transition-smooth)',
-                transform: `translateX(-${currentVideo * (100 / videos.length)}%)`
+                transform: `translateX(-${currentVideo * (100 / (isFullscreen ? videos.length : 1))}%)`
               }}
             >
-              {videos.map((src, idx) => (
+              {(isFullscreen ? videos : [videos[0]]).map((src, idx) => (
                 <video 
-                  key={idx}
+                  key={isFullscreen ? idx : "main-video"}
                   ref={el => videoRefs.current[idx] = el}
                   src={src} 
                   preload={idx === 0 ? "auto" : "metadata"}
@@ -202,7 +221,7 @@ const Hero = () => {
                   playsInline
                   onEnded={handleVideoEnded}
                   className="hero-video"
-                  style={{ width: `${100 / videos.length}%`, height: '100%', objectFit: 'cover' }}
+                  style={{ width: `${100 / (isFullscreen ? videos.length : 1)}%`, height: '100%', objectFit: 'cover' }}
                 ></video>
               ))}
             </div>

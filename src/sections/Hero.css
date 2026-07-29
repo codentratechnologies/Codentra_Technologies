@@ -173,19 +173,20 @@
 
 @media (max-width: 768px) {
   .hero-video-wrapper {
-    width: 92%;
-    aspect-ratio: 16 / 9;
+    width: 85%;
+    max-width: 380px; /* Constrain max width so it doesn't get ridiculously tall */
+    aspect-ratio: 9 / 16;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
+    border-radius: 16px;
   }
 
   .hero-device-mockup {
     border: 6px solid #1a1a1a;
-    border-radius: 12px;
+    border-radius: 24px;
   }
 
   .hero-video-inner {
-    border-radius: 8px;
+    border-radius: 18px;
   }
 
   .hero-heading {
