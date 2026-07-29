@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
   const containerRef = useRef(null);
+  const cardsContainerRef = useRef(null);
 
   // Gradient of deep blues for the service cards
   const cardColors = [
@@ -26,7 +27,7 @@ const Services = () => {
         ScrollTrigger.create({
           trigger: card,
           start: `top ${20 + (i * 2)}%`, // Stagger the pinning point slightly so they layer visibly
-          endTrigger: containerRef.current,
+          endTrigger: cardsContainerRef.current,
           end: 'bottom bottom',
           pin: true,
           pinSpacing: false,
@@ -71,7 +72,7 @@ const Services = () => {
         </p>
       </div>
 
-      <div className="services-cards-container">
+      <div className="services-cards-container" ref={cardsContainerRef}>
         {services.map((service, idx) => {
           const Icon = FiIcons[service.icon];
           return (
