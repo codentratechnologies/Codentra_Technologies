@@ -21,7 +21,7 @@ const Services = () => {
     const cards = gsap.utils.toArray('.service-card');
     const mm = gsap.matchMedia();
     
-    mm.add("(min-width: 769px)", () => {
+    mm.add("all", () => {
       cards.forEach((card, i) => {
         ScrollTrigger.create({
           trigger: card,
@@ -52,32 +52,6 @@ const Services = () => {
             }
           );
         }
-      });
-    });
-
-    mm.add("(max-width: 768px)", () => {
-      // 3D Coverflow horizontal scroll animation
-      cards.forEach((card, i) => {
-        gsap.set(card, { transformPerspective: 1000 });
-        
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            scroller: ".services-cards-container",
-            horizontal: true,
-            start: "left 100%", // Enters screen from the right
-            end: "right 0%",    // Exits screen to the left
-            scrub: 1
-          }
-        });
-        
-        tl.fromTo(card, 
-          { rotateY: 25, scale: 0.8, opacity: 0.3 },
-          { rotateY: 0, scale: 1, opacity: 1, ease: "power2.out", duration: 1 }
-        )
-        .to(card, 
-          { rotateY: -25, scale: 0.8, opacity: 0.3, ease: "power2.in", duration: 1 }
-        );
       });
     });
 
