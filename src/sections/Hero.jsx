@@ -15,13 +15,22 @@ const Hero = () => {
   const videoRefs = useRef([]);
   const lastInteractionTime = useRef(0);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
-  const videos = [
+  const desktopVideos = [
     '/main1.mp4',
     '/main2.mp4',
-    isMobileDevice ? '/pramukh_mobile.mp4' : '/pramukh.mp4',
+    '/pramukh.mp4',
     '/creative_canvas.mp4'
   ];
-  const taglines = ["What's Coming Next", "Scale", "Innovation", "The Future"];
+  const mobileVideos = [
+    '/mobile_video/main1_mobile.mp4',
+    '/mobile_video/pramukh_mobile.mp4',
+    '/mobile_video/creative_canvas_mobile.mp4'
+  ];
+  const videos = isMobileDevice ? mobileVideos : desktopVideos;
+
+  const desktopTaglines = ["What's Coming Next", "Scale", "Innovation", "The Future"];
+  const mobileTaglines = ["What's Coming Next", "Innovation", "The Future"];
+  const taglines = isMobileDevice ? mobileTaglines : desktopTaglines;
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(0);
   const [taglineIdx, setTaglineIdx] = useState(0);
