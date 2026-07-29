@@ -27,8 +27,14 @@
 
 @media (min-width: 1024px) {
   .about-container {
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 4rem;
+  }
+  
+  .about-header {
+    flex: 1;
   }
 }
 
