@@ -67,10 +67,9 @@
   width: 100%;
   height: auto;
   min-height: clamp(350px, 40vh, 550px);
+  max-height: 75vh; /* Ensure card is never taller than viewport to prevent clipping overlaps */
   border-radius: 16px;
   box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 15vh; /* Sticking point */
   display: block;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -126,6 +125,19 @@
   position: relative;
   z-index: 2;
   box-sizing: border-box;
+  overflow-y: auto; /* Allow internal scrolling if content is taller than max-height */
+}
+
+/* Custom scrollbar for service-card-content */
+.service-card-content::-webkit-scrollbar {
+  width: 4px;
+}
+.service-card-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.service-card-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
 }
 
 .service-card-top {
@@ -213,15 +225,4 @@
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   z-index: 1;
-}
-
-@media (max-width: 768px) {
-  .service-card {
-    position: relative;
-    top: auto;
-    margin-bottom: 2rem;
-  }
-  .services-cards-container {
-    padding-bottom: 2rem;
-  }
 }

@@ -23,7 +23,17 @@ const Services = () => {
 
     mm.add("all", () => {
       cards.forEach((card, i) => {
-        // Use CSS position: sticky for pinning instead of GSAP to prevent mobile height/clipping bugs
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top ${20 + (i * 2)}%`, // Stagger the pinning point slightly so they layer visibly
+          endTrigger: containerRef.current,
+          end: 'bottom bottom',
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          fastScrollEnd: true,
+          id: `service-card-${i}`
+        });
 
         // Add a scale effect to give a sense of depth
         if (i > 0) {

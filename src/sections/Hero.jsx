@@ -141,9 +141,7 @@ const Hero = () => {
   }, [currentVideo]);
 
   const handleVideoEnded = () => {
-    if (isFullscreen) {
-      setCurrentVideo((prev) => (prev + 1) % videos.length); // Loop to next video
-    }
+    setCurrentVideo((prev) => (prev + 1) % videos.length); // Loop to next video
   };
 
   useGSAP(() => {
