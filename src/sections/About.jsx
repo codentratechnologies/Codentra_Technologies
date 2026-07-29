@@ -63,13 +63,14 @@ const About = () => {
     <section id="about" className="about-section dark-theme" ref={containerRef}>
       <div className="about-container">
         
-        <div className="section-header">
-          <div className="section-header-label">
-            <span className="dot"></span>
-            <p>PROVEN RESULTS</p>
-          </div>
-          <h2>Powerful Impact.</h2>
-          <p className="section-desc">
+        <div className="about-header">
+          <div className="glow-orb"></div>
+          <h1 className="about-title">
+            Proven <br/> Results. <br/>
+            <span className="text-gradient">Powerful</span> <br/>
+            <span className="text-gradient">Impact.</span>
+          </h1>
+          <p className="about-subtitle">
             We deliver engineered excellence that translates into measurable business growth and digital transformation.
           </p>
         </div>
