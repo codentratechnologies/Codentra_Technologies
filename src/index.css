@@ -54,3 +54,73 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Global Section Header Styles */
+.section-header {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(0, 229, 255, 0.1);
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.section-header-label .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #00E5FF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.section-header-label p {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #00E5FF;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+}
+
+.section-header h2 {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(135deg, #111827 0%, #4b5563 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  max-width: 800px;
+}
+
+/* Special white text for dark backgrounds */
+.dark-theme .section-header h2 {
+  background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-desc {
+  color: #6b7280;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+}
+
+.dark-theme .section-desc {
+  color: #9ca3af;
+}

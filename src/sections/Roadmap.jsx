@@ -7,8 +7,8 @@ const Roadmap = () => {
     <section id="roadmap" className="roadmap-section">
       <div className="roadmap-container">
         
-        <div className="roadmap-header-section">
-          <div className="roadmap-header-label">
+        <div className="section-header">
+          <div className="section-header-label">
             <span className="dot"></span>
             <p>Our Approach</p>
           </div>

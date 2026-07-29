@@ -14,12 +14,12 @@ const WhyChooseUs = () => {
     <section className="why-section">
       <div className="why-container">
         
-        <div className="why-header">
-          <div className="why-subtitle">
-            <span className="blue-line"></span>
+        <div className="section-header">
+          <div className="section-header-label">
+            <span className="dot"></span>
             <p>THE CODENTRA ADVANTAGE</p>
           </div>
-          <h2 className="why-title">
+          <h2>
             Why Global Startups <br /> Choose Us
           </h2>
         </div>

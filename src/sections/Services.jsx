@@ -60,13 +60,13 @@ const Services = () => {
 
   return (
     <section id="services" className="services-section" ref={containerRef}>
-      <div className="services-header">
-        <div className="services-header-label">
+      <div className="section-header">
+        <div className="section-header-label">
           <span className="dot"></span>
           <p>Our Services</p>
         </div>
         <h2>From architecture design <br />to AI-powered platforms</h2>
-        <p className="services-desc">
+        <p className="section-desc">
           we design and build software for the future.
         </p>
       </div>

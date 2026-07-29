@@ -14,12 +14,12 @@ const Testimonials = () => {
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-container">
         
-        <div className="testimonials-header">
-          <div className="testimonials-subtitle">
-            <span className="blue-line"></span>
+        <div className="section-header">
+          <div className="section-header-label">
+            <span className="dot"></span>
             <p>CLIENT REVIEWS</p>
           </div>
-          <h2 className="testimonials-title">What Our Partners Say</h2>
+          <h2>What Our Partners Say</h2>
         </div>
 
         <div className="testimonials-marquee">

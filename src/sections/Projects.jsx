@@ -53,13 +53,13 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects-section" ref={containerRef}>
-      <div className="projects-header">
-        <div className="projects-header-label">
+      <div className="section-header">
+        <div className="section-header-label">
           <span className="dot"></span>
           <p>Our Work</p>
         </div>
         <h2>Unseen Possibilities.</h2>
-        <p className="projects-desc">
+        <p className="section-desc">
           Codentra Technologies is a people-first technology company focused on building innovative digital solutions that care about your business growth and product success as much as you do.
         </p>
       </div>
