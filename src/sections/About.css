@@ -27,17 +27,11 @@
 
 @media (min-width: 1024px) {
   .about-container {
-    flex-direction: row;
     align-items: center;
-    gap: 6rem;
+    gap: 4rem;
   }
 }
 
-/* ── HEADER (Left side) ── */
-.about-header {
-  flex: 1;
-  position: relative;
-}
 
 .glow-orb {
   position: absolute;

@@ -69,14 +69,14 @@ const Contact = () => {
    return (
       <section id="contact" className="contact-section">
          <div className="contact-container">
-            <div className="contact-left">
-               <h2 className="contact-heading">
-                  Ready to shape <br/>the future together?
-               </h2>
-               <div className="contact-cta">
-                  <span className="contact-cta-line"></span>
+            <div className="section-header">
+               <div className="section-header-label">
+                  <span className="dot"></span>
                   <p>LET'S TALK</p>
                </div>
+               <h2>
+                  Ready to shape <br/>the future together?
+               </h2>
             </div>
 
             <div className="contact-right">
