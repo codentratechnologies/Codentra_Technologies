@@ -101,8 +101,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  margin-top: -15vh;
-  /* Pull container up to reduce visual gap */
+  margin-top: 0;
 }
 
 .hero-video-wrapper {
@@ -204,7 +203,7 @@
     height: 100dvh;
     /* Restore full screen height for the pinning transition to work correctly */
     min-height: 400px;
-    margin-top: -5vh;
+    margin-top: 0;
     padding-bottom: 0;
   }
 }
