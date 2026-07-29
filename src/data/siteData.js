@@ -137,8 +137,7 @@ export const projectsData = [
     statLabel: "Products",
     statValue2: "100%",
     statLabel2: "Craftsmanship",
-    image: "/images/radhe_shyam.png",
-    link: "#"
+    image: "/images/radhe_shyam.png"
   },
   {
     title: "Eventia",
@@ -147,8 +146,7 @@ export const projectsData = [
     statLabel: "Tickets Sold",
     statValue2: "500+",
     statLabel2: "Events Hosted",
-    image: "/images/eventia.png",
-    link: "#"
+    image: "/images/eventia.png"
   }
 ];
 
