@@ -16,10 +16,10 @@ const Hero = () => {
   const lastInteractionTime = useRef(0);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
   const videos = [
-    isMobileDevice ? '/video4_mobile.mp4' : '/video4.mp4',
-    '/video1.mp4', 
-    '/video2.mp4', 
-    '/video3.mp4'
+    '/main1.mp4',
+    '/main2.mp4',
+    isMobileDevice ? '/pramukh_mobile.mp4' : '/pramukh.mp4',
+    '/creative_canvas.mp4'
   ];
   const taglines = ["What's Coming Next", "Scale", "Innovation", "The Future"];
   const [isFullscreen, setIsFullscreen] = useState(false);
