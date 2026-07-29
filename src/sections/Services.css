@@ -214,3 +214,14 @@
   border-radius: 50%;
   z-index: 1;
 }
+
+@media (max-width: 768px) {
+  .service-card {
+    position: relative;
+    top: auto;
+    margin-bottom: 2rem;
+  }
+  .services-cards-container {
+    padding-bottom: 2rem;
+  }
+}
