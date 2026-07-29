@@ -20,7 +20,7 @@ const Projects = () => {
       cards.forEach((card, i) => {
         ScrollTrigger.create({
           trigger: card,
-          start: 'top 15%', // Pin when the card hits 15% from top
+          start: 'top 120px', // Pin at a fixed pixel coordinate to ensure perfect stacking on mobile
           endTrigger: containerRef.current,
           end: 'bottom top',
           pin: true,
