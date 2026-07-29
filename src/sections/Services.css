@@ -69,7 +69,8 @@
   min-height: clamp(350px, 40vh, 550px);
   border-radius: 16px;
   box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-  position: relative;
+  position: sticky;
+  top: 15vh; /* Sticking point */
   display: block;
   overflow: hidden;
   margin-bottom: 1rem;

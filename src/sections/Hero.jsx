@@ -34,6 +34,34 @@ const Hero = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(0);
   const [taglineIdx, setTaglineIdx] = useState(0);
+  
+  // Touch Swiping State
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      setCurrentVideo(prev => Math.min(prev + 1, videos.length - 1));
+    }
+    if (isRightSwipe) {
+      setCurrentVideo(prev => Math.max(prev - 1, 0));
+    }
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobileDevice(window.innerWidth <= 768);
@@ -53,8 +81,6 @@ const Hero = () => {
   // Keyboard and Horizontal Trackpad Navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (!isFullscreen) return;
-      
       let nextIndex = currentVideo;
       if (e.key === 'ArrowRight') {
         nextIndex = Math.min(currentVideo + 1, videos.length - 1);
@@ -70,8 +96,6 @@ const Hero = () => {
     };
 
     const handleWheel = (e) => {
-      if (!isFullscreen) return;
-      
       // Handle horizontal swipe (trackpad)
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
         e.preventDefault();
@@ -211,17 +235,20 @@ const Hero = () => {
           <div className="hero-video-inner">
             <div 
               className="hero-video-slider"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
               style={{
                 display: 'flex',
-                width: `${(isFullscreen ? videos.length : 1) * 100}%`,
+                width: `${videos.length * 100}%`,
                 height: '100%',
                 transition: 'transform var(--transition-smooth)',
-                transform: `translateX(-${currentVideo * (100 / (isFullscreen ? videos.length : 1))}%)`
+                transform: `translateX(-${currentVideo * (100 / videos.length)}%)`
               }}
             >
-              {(isFullscreen ? videos : [videos[0]]).map((src, idx) => (
+              {videos.map((src, idx) => (
                 <video 
-                  key={isFullscreen ? idx : "main-video"}
+                  key={idx}
                   ref={el => videoRefs.current[idx] = el}
                   src={src} 
                   preload={idx === 0 ? "auto" : "metadata"}
@@ -230,24 +257,22 @@ const Hero = () => {
                   playsInline
                   onEnded={handleVideoEnded}
                   className="hero-video"
-                  style={{ width: `${100 / (isFullscreen ? videos.length : 1)}%`, height: '100%', objectFit: 'cover' }}
+                  style={{ width: `${100 / videos.length}%`, height: '100%', objectFit: 'cover' }}
                 ></video>
               ))}
             </div>
             
-            {/* Total Count Bar - Only visible in fullscreen */}
-            {isFullscreen && (
-              <div className="video-progress-container">
-                {videos.map((_, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`video-progress-bar ${idx === currentVideo ? 'active' : ''}`}
-                    onClick={() => setCurrentVideo(idx)} // Added click to navigate
-                    style={{ cursor: 'pointer' }}
-                  ></div>
-                ))}
-              </div>
-            )}
+            {/* Total Count Bar - Always visible */}
+            <div className="video-progress-container">
+              {videos.map((_, idx) => (
+                <div 
+                  key={idx} 
+                  className={`video-progress-bar ${idx === currentVideo ? 'active' : ''}`}
+                  onClick={() => setCurrentVideo(idx)} // Added click to navigate
+                  style={{ cursor: 'pointer' }}
+                ></div>
+              ))}
+            </div>
           </div>
           <div className="hero-device-mockup"></div>
         </div>
