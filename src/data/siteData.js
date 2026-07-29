@@ -139,6 +139,16 @@ export const projectsData = [
     statLabel2: "Craftsmanship",
     image: "/images/radhe_shyam.png",
     link: "#"
+  },
+  {
+    title: "Eventia",
+    desc: "A powerful event management and ticketing platform that simplifies planning, booking, and hosting memorable experiences.",
+    statValue: "10k+",
+    statLabel: "Tickets Sold",
+    statValue2: "500+",
+    statLabel2: "Events Hosted",
+    image: "/images/eventia.png",
+    link: "#"
   }
 ];
 
