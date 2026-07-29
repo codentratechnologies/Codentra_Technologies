@@ -120,7 +120,12 @@
   .work-card {
     flex-direction: column-reverse; /* Image on top */
     box-shadow: 0 20px 40px -15px rgba(0, 229, 255, 0.08);
-    height: 600px;
+    height: 650px;
+  }
+  .work-card-left,
+  .work-card-right {
+    height: 50%;
+    flex: none;
   }
 }
 
