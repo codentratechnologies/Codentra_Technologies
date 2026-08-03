@@ -94,7 +94,13 @@
   max-width: 1400px;
   position: relative;
   /* Reduced padding bottom to decrease gap before Testimonials */
-  padding-bottom: 5vh;
+  padding-bottom: 15vh;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .projects-cards-container {
+    padding-bottom: 20vh;
+  }
 }
 
 
@@ -124,6 +130,25 @@
     height: 550px; /* Fixed height for all cards */
   }
 }
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .work-card {
+    height: 480px; 
+    margin-bottom: 2.5rem;
+  }
+  .work-card-left {
+    padding: 2.5rem;
+  }
+  .work-card-left h3 {
+    font-size: clamp(24px, 3vw, 40px);
+    margin-bottom: 1rem;
+  }
+  .work-card-left p {
+    margin-bottom: 2rem;
+    font-size: 15px;
+  }
+}
+
 
 .work-card-left {
   flex: 1;
