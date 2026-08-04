@@ -102,19 +102,19 @@ export const projectsData = [
   {
     title: "Creative Canvas",
     desc: "Premium Handcrafted Resin Art & Kasab Embroidery. Shop unique handmade products from India.",
-    statValue: "500+",
-    statLabel: "Community",
-    statValue2: "130+",
-    statLabel2: "Creations",
+    statValue: "200+",
+    statLabel: "Happy Clients",
+    statValue2: "100%",
+    statLabel2: "Handmade",
     image: "/images/creative_canvas.png",
     link: "https://creativecanvas-26.vercel.app/"
   },
   {
     title: "Aura Finance",
     desc: "An intelligent, AI-powered financial dashboard delivering real-time market data, sentiment analysis, and personalized insights.",
-    statValue: "$128k+",
-    statLabel: "Portfolio Value",
-    statValue2: "78",
+    statValue: "7+",
+    statLabel: "Asset Classes",
+    statValue2: "Real-Time",
     statLabel2: "AI Sentiment",
     image: "/images/aura_finance.png",
     link: "https://auraafinance.vercel.app/"
@@ -123,29 +123,29 @@ export const projectsData = [
   {
     title: "Pramukh Scrap",
     desc: "A comprehensive digital platform for seamless scrap trading, recycling management, and sustainable business operations.",
-    statValue: "50%",
-    statLabel: "Efficiency",
-    statValue2: "100%",
-    statLabel2: "Sustainable",
+    statValue: "30+",
+    statLabel: "Tons Recycled",
+    statValue2: "300+",
+    statLabel2: "Happy Customers",
     image: "/images/pramukh.png",
     link: "https://www.pramukhscrap.in/"
   },
   {
     title: "Radhe Shyam Furniture",
     desc: "An elegant e-commerce and showcase platform designed for premium handcrafted furniture and modern interiors.",
-    statValue: "200+",
-    statLabel: "Products",
+    statValue: "20+",
+    statLabel: "Customers",
     statValue2: "100%",
-    statLabel2: "Craftsmanship",
+    statLabel2: "Secured Data",
     image: "/images/radhe_shyam.png"
   },
   {
     title: "Eventia",
     desc: "A powerful event management and ticketing platform that simplifies planning, booking, and hosting memorable experiences.",
-    statValue: "10k+",
-    statLabel: "Tickets Sold",
-    statValue2: "500+",
-    statLabel2: "Events Hosted",
+    statValue: "25+",
+    statLabel: "Events Hosted",
+    statValue2: "100%",
+    statLabel2: "Data Security",
     image: "/images/eventia.png"
   }
 ];
