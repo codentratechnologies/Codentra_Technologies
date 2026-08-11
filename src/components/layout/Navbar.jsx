@@ -1,163 +1,120 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig, navLinks } from '../../data/siteData';
-import './Navbar.css';
+import MagneticButton from '../ui/MagneticButton';
+import { cn } from '../../utils/cn';
 
-const Navbar = () => {
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLightBackground, setIsLightBackground] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Classes known to have a white/light background
-    const lightClasses = ['services-section', 'projects-section', 'testimonials-section'];
-
     const handleScroll = () => {
-      // Query sections dynamically in case they are rendered after navbar
-      const sections = Array.from(document.querySelectorAll(
-        '.hero-wrapper, .about-section, .services-section, .why-section, .projects-section, .testimonials-section, .roadmap-section, .contact-section, footer'
-      ));
-
-      let currentSection = null;
-      for (const section of sections) {
-        const rect = section.getBoundingClientRect();
-        // Check if the navbar (which is roughly 80px tall) is inside this section
-        if (rect.top <= 40 && rect.bottom >= 40) {
-          currentSection = section;
-          break;
-        }
-      }
-
-      if (currentSection) {
-        if (currentSection.classList.contains('hero-wrapper')) {
-           setIsLightBackground(window.scrollY < window.innerHeight * 1.2);
-        } else {
-           const isLight = lightClasses.some(c => currentSection.classList.contains(c));
-           setIsLightBackground(isLight);
-        }
-      }
-      
-      setIsScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
-    // Initial check on load
-    handleScroll();
-    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle browser back button to close menu intuitively
-  useEffect(() => {
-    const handlePopState = (e) => {
-      if (mobileMenuOpen) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    if (mobileMenuOpen) {
-      window.history.pushState({ menuOpen: true }, '');
-      window.addEventListener('popstate', handlePopState);
-    }
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [mobileMenuOpen]);
-
-  const handleHamburgerClick = () => {
-    if (mobileMenuOpen) {
-      setMobileMenuOpen(false);
-      // Only navigate back if the user manually clicks the X
-      if (window.history.state && window.history.state.menuOpen) {
-        window.history.back();
-      }
-    } else {
-      setMobileMenuOpen(true);
-    }
-  };
-
-  const handleLinkClick = () => {
-    setMobileMenuOpen(false);
-    // If they click a link, clean up the history state so pressing back later doesn't reopen the menu,
-    // but DO NOT call history.back() because we want the anchor link to successfully navigate!
-    if (window.history.state && window.history.state.menuOpen) {
-      window.history.replaceState({}, '');
-    }
-  };
-
-  const glassClass = !isScrolled 
-    ? 'navbar-glass-transparent' 
-    : (isLightBackground ? 'navbar-glass-light' : 'navbar-glass-dark');
-
   return (
     <>
-      <div className={`navbar-glass-bg ${glassClass}`}></div>
-      <header className={`navbar-wrapper ${isLightBackground && !mobileMenuOpen ? 'navbar-dark-text' : ''}`}>
-        <div className="navbar-container">
-          <div className="navbar-logo-area">
-            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
-              <img src="/logo.png" alt="Codentra Logo" className="navbar-logo-img" style={{ height: '48px', width: 'auto' }} />
-            </a>
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-500",
+          scrolled ? "py-2" : "py-6"
+        )}
+      >
+        <div className={cn(
+          "max-w-7xl mx-auto flex items-center justify-between rounded-full transition-all duration-500",
+          scrolled ? "glass px-6 py-3" : "px-2"
+        )}>
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-2 group magnetic cursor-none">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-black font-bold text-xl group-hover:scale-110 transition-transform">
+              C
+            </div>
+            <span className="font-heading font-bold text-xl tracking-tight hidden sm:block">
+              Codentra
+            </span>
+          </a>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((link, i) => (
+              <MagneticButton 
+                key={i} 
+                variant="text" 
+                as="a" 
+                href={link.href}
+                className="text-sm font-medium tracking-wide uppercase"
+              >
+                {link.name}
+              </MagneticButton>
+            ))}
           </div>
 
-          <nav className="navbar-links">
-            {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="navbar-link">
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
-          <div className="navbar-actions">
-            <a href="#contact" className="navbar-contact-btn">Contact Us</a>
-            <button 
-              className="navbar-hamburger" 
-              onClick={handleHamburgerClick}
+          {/* CTA & Mobile Toggle */}
+          <div className="flex items-center gap-4">
+            <MagneticButton 
+              as="a" 
+              href="#contact" 
+              variant="primary"
+              className="hidden sm:inline-flex px-6 py-2 text-sm"
             >
-              <span style={{ transform: mobileMenuOpen ? 'translateY(9px) rotate(45deg)' : 'none' }}></span>
-              <span style={{ opacity: mobileMenuOpen ? 0 : 1 }}></span>
-              <span style={{ transform: mobileMenuOpen ? 'translateY(-9px) rotate(-45deg)' : 'none' }}></span>
+              Start Project
+            </MagneticButton>
+            
+            <button 
+              className="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-50 magnetic cursor-none"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <motion.span 
+                animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }} 
+                className="w-6 h-0.5 bg-white block"
+              />
+              <motion.span 
+                animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }} 
+                className="w-6 h-0.5 bg-white block"
+              />
+              <motion.span 
+                animate={mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }} 
+                className="w-6 h-0.5 bg-white block"
+              />
             </button>
           </div>
         </div>
-      </header>
+      </motion.nav>
 
-      {/* Fullscreen Mobile Menu */}
-      <div 
-        style={{ 
-          position: 'fixed', 
-          inset: 0, 
-          backgroundColor: '#0a121e', 
-          zIndex: 99, 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          gap: '2rem',
-          transition: 'transform var(--transition-smooth)',
-          transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-100%)'
-        }}
-      >
-        {navLinks.map((link) => (
-          <a 
-            key={link.name} 
-            href={link.href} 
-            style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', textDecoration: 'none' }}
-            onClick={handleLinkClick}
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 z-40 bg-background/80 flex flex-col items-center justify-center"
           >
-            {link.name}
-          </a>
-        ))}
-        <a 
-          href="#contact" 
-          style={{ marginTop: '1rem', backgroundColor: '#00E5FF', color: 'black', fontSize: '1.125rem', fontWeight: 'bold', padding: '1rem clamp(1.5rem, 5vw, 3rem)', borderRadius: '0.75rem', textDecoration: 'none' }}
-          onClick={handleLinkClick}
-        >
-          Contact Us
-        </a>
-      </div>
+            <div className="flex flex-col items-center gap-8">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={i}
+                  href={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i }}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-4xl font-heading font-bold text-white hover:text-primary transition-colors"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
-};
-
-export default Navbar;
+}

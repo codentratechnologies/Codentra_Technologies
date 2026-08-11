@@ -5,77 +5,48 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon-v8.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Codentra Technologies</title>
-  <meta name="description"
-    content="Codentra Technologies architects scalable software, enterprise mobile applications, and immersive digital experiences for the next generation of business innovation." />
-  <meta name="keywords"
-    content="Software Development, React, Python, Flutter, AI Solutions, Cloud Computing, SaaS Development" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Codentra Technologies | Award-Winning Digital Engineering</title>
+  <meta name="description" content="Codentra Technologies architects scalable software, enterprise mobile applications, and immersive digital experiences for the next generation of business innovation." />
+  <meta name="keywords" content="Software Development, React, Python, Flutter, AI Solutions, Cloud Computing, UI/UX Design, Enterprise Solutions" />
+  <meta name="author" content="Codentra Technologies" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://codentra.tech/" />
-  <meta property="og:title" content="Codentra Technologies" />
-  <meta property="og:description"
-    content="Premium software development startup specializing in high-performance digital products." />
+  <meta property="og:title" content="Codentra Technologies | Premium Digital Experiences" />
+  <meta property="og:description" content="Premium software development startup specializing in high-performance digital products and scalable architecture." />
   <meta property="og:image" content="/og-image.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://codentra.tech/" />
   <meta property="twitter:title" content="Codentra Technologies" />
-  <meta property="twitter:description"
-    content="Premium software development startup specializing in high-performance digital products." />
+  <meta property="twitter:description" content="Premium software development startup specializing in high-performance digital products and scalable architecture." />
   <meta property="twitter:image" content="/og-image.png" />
-  <link rel="stylesheet" href="/loader.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300&display=swap" rel="stylesheet">
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Codentra Technologies",
+    "url": "https://codentra.tech",
+    "logo": "https://codentra.tech/favicon-v8.png",
+    "description": "Premium software development agency specializing in web, mobile, and AI solutions.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangalore",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
 </head>
-<body>
-  <div class="loader-screen" id="loader-screen">
-      <!-- Deep ambient background -->
-      <canvas id="bg-canvas"></canvas>
-      <!-- Grid overlay -->
-      <div class="grid-overlay"></div>
-      <!-- ── FULL CENTER COMPOSITION ── -->
-      <div class="composition">
-          <!-- Logo area with rings -->
-          <div class="logo-stage" id="logo-stage">
-              <div class="ring ring-3"></div>
-              <div class="ring ring-2"></div>
-              <div class="ring ring-1"></div>
-              <!-- Orbiting flare dot -->
-              <div class="orbit-flare" id="orbit-flare">
-                  <div class="flare-dot"></div>
-              </div>
-              <!-- Scanner sweep -->
-              <div class="logo-scanner" id="logo-scanner"></div>
-              <div class="logo-glow" id="logo-glow"></div>
-              <div class="logo-glow logo-glow-2"></div>
-              <img src="/codentra-logo.png" class="logo-img" id="main-logo" alt="Codentra">
-          </div>
-          <!-- Brand block -->
-          <div class="brand-block">
-              <div class="brand-name" id="brand-name">
-                  <span>C</span><span>O</span><span>D</span><span>E</span><span>N</span><span>T</span><span>R</span><span>A</span>
-              </div>
-              <div class="brand-divider" id="brand-divider"></div>
-              <div class="brand-sub" id="brand-sub">TECHNOLOGIES</div>
-          </div>
-          <!-- Progress section — inline with content -->
-          <div class="progress-section">
-              <div class="progress-track">
-                  <div class="progress-fill" id="progress-fill"></div>
-                  <div class="progress-dot" id="progress-dot"></div>
-              </div>
-              <div class="progress-footer">
-                  <div class="progress-label" id="progress-label">0%</div>
-              </div>
-          </div>
-      </div>
-  </div>
 
+<body class="bg-[#050505] text-white overflow-x-hidden antialiased">
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  <script src="/loader.js"></script>
 </body>
 
 </html>

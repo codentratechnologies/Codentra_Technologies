@@ -1,87 +1,51 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { Suspense, lazy } from 'react';
 import Navbar from './components/layout/Navbar';
-import CursorGlow from './components/common/CursorGlow';
-import Reveal from './components/common/Reveal';
-
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Services from './sections/Services';
-import WhyChooseUs from './sections/WhyChooseUs';
-import Projects from './sections/Projects';
-import Testimonials from './sections/Testimonials';
-import Roadmap from './sections/Roadmap';
-import Contact from './sections/Contact';
 import Footer from './components/layout/Footer';
-import { techStack, ctaContent } from './data/siteData';
-import './App.css';
 
-const App = () => {
+import PageLoader from './components/ui/PageLoader';
+import { ErrorBoundary } from './components/ui/ErrorBoundary';
 
+// Lazy load sections for better initial load performance (code splitting)
+const HeroSection = lazy(() => import('./sections/HeroSection'));
+const AboutSection = lazy(() => import('./sections/AboutSection'));
+const ServicesSection = lazy(() => import('./sections/ServicesSection'));
+const IndustriesSection = lazy(() => import('./sections/IndustriesSection'));
+const ProcessSection = lazy(() => import('./sections/ProcessSection'));
+const TechnologiesSection = lazy(() => import('./sections/TechnologiesSection'));
+const PortfolioSection = lazy(() => import('./sections/PortfolioSection'));
+const WhyChooseUsSection = lazy(() => import('./sections/WhyChooseUsSection'));
+const TestimonialsSection = lazy(() => import('./sections/TestimonialsSection'));
+const FAQSection = lazy(() => import('./sections/FAQSection'));
+const ContactSection = lazy(() => import('./sections/ContactSection'));
+
+function App() {
   return (
-    <div className="app-wrapper">
+    <div className="relative w-full min-h-screen bg-background selection:bg-primary/30 selection:text-white font-sans text-white">
+      <PageLoader />
 
-
-      <CursorGlow />
       <Navbar />
-
-      <main>
-        <Hero />
-
-        {/* Tech Stack Marquee */}
-        <div className="marquee-container" style={{ margin: '1.5rem 0', overflow: 'hidden' }}>
-          <motion.div
-            className="marquee-content"
-            animate={{ x: [0, -1000] }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{ display: 'flex' }}
-          >
-            {Array(10).fill("Code Ka मंत्रा - Codentra").map((text, i) => (
-              <motion.span
-                key={i}
-                className="marquee-item"
-                whileHover={{ color: "#ffffff", scale: 1.1, opacity: 1 }}
-                style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#00E5FF', whiteSpace: 'nowrap' }}
-              >
-                {text}
-              </motion.span>
-            ))}
-          </motion.div>
-        </div>
-
-        <About />
-        <Services />
-        <WhyChooseUs />
-
-        <div className="cta-divider section">
-          <div className="container">
-            <Reveal width="100%">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="glass-card cta-card"
-                style={{ textAlign: 'center' }}
-              >
-                <h2>{ctaContent.title}</h2>
-                <p>{ctaContent.desc}</p>
-                <a href={ctaContent.href} className="btn btn-primary" style={{ display: 'inline-block', marginTop: '1rem', padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem)', background: 'var(--color-blue)', borderRadius: '8px' }}>{ctaContent.btnText}</a>
-              </motion.div>
-            </Reveal>
-          </div>
-        </div>
-
-        <Projects />
-        <Testimonials />
-        <Roadmap />
-        <Contact />
-      </main>
+      
+      <ErrorBoundary>
+        <main>
+          <Suspense fallback={null}>
+            <HeroSection />
+            <AboutSection />
+            <ServicesSection />
+            <IndustriesSection />
+            <ProcessSection />
+            <TechnologiesSection />
+            <PortfolioSection />
+            <WhyChooseUsSection />
+            <TestimonialsSection />
+            <FAQSection />
+            <ContactSection />
+          </Suspense>
+        </main>
+      </ErrorBoundary>
 
       <Footer />
     </div>
   );
-};
+}
 
 export default App;
