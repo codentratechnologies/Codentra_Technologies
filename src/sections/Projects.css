@@ -421,14 +421,17 @@
   .browser-mockup-body {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 10;
-    background: #ffffff;
+    aspect-ratio: 16 / 11;
+    background: #f8fafc;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .mockup-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: top center;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -513,7 +516,7 @@
   }
 
   .browser-mockup-body {
-    aspect-ratio: 16 / 10.5;
+    aspect-ratio: 16 / 11;
   }
 
   .work-card-left {
