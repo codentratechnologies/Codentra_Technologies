@@ -380,17 +380,18 @@
   .work-card {
     flex-direction: column-reverse;
     /* Browser mockup on top */
-    height: auto;
-    min-height: 440px;
-    /* Uniform height across all cards */
-    max-height: calc(100dvh - 120px);
+    height: 520px;
+    min-height: 520px;
+    max-height: calc(100dvh - 110px);
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     border-radius: 20px;
+    background: #ffffff !important;
   }
 
   .work-card.no-link {
-    min-height: 440px;
+    height: 520px;
+    min-height: 520px;
   }
 
   .work-card-right {
@@ -440,7 +441,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow-y: auto;
+    overflow: hidden;
   }
 
   .project-title {
@@ -474,7 +475,15 @@
 
   .project-action-row {
     display: flex;
+    align-items: center;
+    min-height: 36px;
     margin-top: 0.25rem;
+  }
+
+  .project-action-placeholder {
+    height: 36px;
+    width: 100%;
+    visibility: hidden;
   }
 
   .project-external-link {
@@ -493,12 +502,10 @@
     width: 90%;
   }
 
-  .work-card {
-    min-height: 440px;
-  }
-
+  .work-card,
   .work-card.no-link {
-    min-height: 440px;
+    height: 500px;
+    min-height: 500px;
   }
 
   .work-card-right {
