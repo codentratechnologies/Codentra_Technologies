@@ -24,8 +24,8 @@ const Projects = () => {
       const { isMobile, isTablet } = context.conditions;
       
       cards.forEach((card, i) => {
-        // Calculate pinning top offset dynamically based on header/viewport
-        const topOffset = isMobile ? '80px' : (isTablet ? '100px' : '110px');
+        // Generous top clearance on mobile/tablet so the card NEVER touches the navbar/top edge
+        const topOffset = isMobile ? '100px' : (isTablet ? '110px' : '110px');
 
         ScrollTrigger.create({
           trigger: card,

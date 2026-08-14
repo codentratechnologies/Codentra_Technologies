@@ -344,16 +344,17 @@
   .work-card {
     flex-direction: column-reverse; /* Browser mockup on top */
     height: auto;
-    max-height: calc(100dvh - 90px);
+    max-height: calc(100dvh - 120px);
     min-height: 0;
-    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
     border-radius: 18px;
   }
 
   .work-card-right {
     width: 100%;
-    height: clamp(160px, 26vh, 220px);
-    min-height: 150px;
+    height: clamp(150px, 24vh, 200px);
+    min-height: 140px;
     flex: none;
     padding: 12px 12px 0 12px;
   }
