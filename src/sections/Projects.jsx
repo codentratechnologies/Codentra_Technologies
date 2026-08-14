@@ -79,62 +79,83 @@ const Projects = () => {
       <div className="projects-cards-container">
         {projectsData.map((project, idx) => (
           <div key={idx} className="work-card">
-            <div className="work-card-left">
-              <h3>{project.title}</h3>
-              <p>{project.desc}</p>
+            {/* Card Background Ambient Glow */}
+            <div className="work-card-ambient-glow"></div>
 
-              <div className="work-card-stats">
-                {project.statValue && (
-                  <div className="stat-item">
-                    <h4>{project.statValue}</h4>
-                    <p>{project.statLabel}</p>
-                  </div>
-                )}
-                {project.statValue && project.statValue2 && (
-                  <div className="divider"></div>
-                )}
-                {project.statValue2 && (
-                  <div className="stat-item">
-                    <h4>{project.statValue2}</h4>
-                    <p>{project.statLabel2}</p>
-                  </div>
-                )}
+            <div className="work-card-left">
+              <div className="work-card-meta">
+                <span className="project-index">0{idx + 1}</span>
+                <span className="project-category-badge">Featured Case Study</span>
               </div>
 
-              {project.link ? (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-external-link"
-                >
-                  Visit Website
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px' }}>
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </a>
-              ) : (
-                <div className="project-external-link" style={{ visibility: 'hidden', pointerEvents: 'none' }}>
-                  Visit Website
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px' }}>
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-desc">{project.desc}</p>
+
+              {(project.statValue || project.statValue2) && (
+                <div className="work-card-stats">
+                  {project.statValue && (
+                    <div className="stat-pill">
+                      <span className="stat-pill-value">{project.statValue}</span>
+                      <span className="stat-pill-label">{project.statLabel}</span>
+                    </div>
+                  )}
+                  {project.statValue && project.statValue2 && (
+                    <div className="stat-pill-divider"></div>
+                  )}
+                  {project.statValue2 && (
+                    <div className="stat-pill">
+                      <span className="stat-pill-value">{project.statValue2}</span>
+                      <span className="stat-pill-label">{project.statLabel2}</span>
+                    </div>
+                  )}
                 </div>
               )}
+
+              <div className="project-action-row">
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-external-link"
+                  >
+                    <span>Explore Live Site</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="link-arrow-icon">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </a>
+                ) : (
+                  <span className="project-tag-proprietary">
+                    Internal Client Product
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="work-card-right">
-              {project.image ? (
-                <img
-                  src={project.image}
-                  alt={`${project.title} mockup`}
-                  className="mockup-image"
-                />
-              ) : (
-                <div className="mockup-placeholder"></div>
-              )}
+              <div className="browser-mockup-frame">
+                <div className="browser-mockup-header">
+                  <div className="browser-dot dot-red"></div>
+                  <div className="browser-dot dot-yellow"></div>
+                  <div className="browser-dot dot-green"></div>
+                  <div className="browser-url-bar">
+                    {project.link ? project.link.replace('https://', '').replace('/', '') : 'codentra.preview.internal'}
+                  </div>
+                </div>
+                <div className="browser-mockup-body">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      className="mockup-image"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="mockup-placeholder"></div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         ))}
