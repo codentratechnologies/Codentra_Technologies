@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import Navbar from './components/layout/Navbar';
 import CursorGlow from './components/common/CursorGlow';
 import Reveal from './components/common/Reveal';
@@ -9,7 +11,9 @@ import Reveal from './components/common/Reveal';
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ 
   ignoreMobileResize: true,
-  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+  limitCallbacks: true,
+  syncInterval: 40
 });
 import Hero from './sections/Hero';
 import About from './sections/About';
@@ -24,6 +28,34 @@ import { techStack, ctaContent } from './data/siteData';
 import './App.css';
 
 const App = () => {
+  useEffect(() => {
+    // Ultra-Smooth Scroll Engine initialized with hardware optimization
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
+      infinite: false
+    });
+
+    // Synchronize Lenis with GSAP ScrollTrigger ticker for buttery 60fps/120fps frame rates
+    lenis.on('scroll', ScrollTrigger.update);
+
+    const updateLenis = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(updateLenis);
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <div className="app-wrapper">

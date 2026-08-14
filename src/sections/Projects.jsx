@@ -41,15 +41,16 @@ const Projects = () => {
         // Subtle fade and slide-in for subsequent cards
         if (i > 0) {
           gsap.fromTo(card,
-            { y: isMobile ? 40 : 80, opacity: 0.2 },
+            { y: isMobile ? 35 : 70, opacity: 0.25 },
             {
               y: 0,
               opacity: 1,
+              ease: "power1.out",
               scrollTrigger: {
                 trigger: card,
-                start: 'top 85%',
+                start: 'top 88%',
                 end: `top ${topOffset}`,
-                scrub: true,
+                scrub: isMobile ? 0.3 : 0.5,
                 fastScrollEnd: true
               }
             }
