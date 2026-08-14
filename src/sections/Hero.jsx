@@ -16,15 +16,10 @@ const Hero = () => {
   const lastInteractionTime = useRef(0);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
   const desktopVideos = [
-    '/main1.mp4',
-    '/main2.mp4',
-    '/pramukh.mp4',
-    '/creative_canvas.mp4'
+    '/main1.mp4'
   ];
   const mobileVideos = [
-    '/mobile_video/main1_mobile.mp4',
-    '/mobile_video/pramukh_mobile.mp4',
-    '/mobile_video/creative_canvas_mobile.mp4'
+    '/mobile_video/main1_mobile.mp4'
   ];
   const videos = isMobileDevice ? mobileVideos : desktopVideos;
 
@@ -35,22 +30,24 @@ const Hero = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
   const [taglineIdx, setTaglineIdx] = useState(0);
   
-  // Touch Swiping State
+  // Touch Swiping State (if multiple videos exist)
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
+    if (videos.length <= 1) return;
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
 
   const onTouchMove = (e) => {
+    if (videos.length <= 1) return;
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (videos.length <= 1 || !touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -249,8 +246,9 @@ const Hero = () => {
                   key={idx}
                   ref={el => videoRefs.current[idx] = el}
                   src={src} 
-                  preload={idx === 0 ? "auto" : "metadata"}
+                  preload="auto"
                   autoPlay={idx === 0} 
+                  loop={videos.length === 1}
                   muted 
                   playsInline
                   onEnded={handleVideoEnded}
@@ -260,17 +258,19 @@ const Hero = () => {
               ))}
             </div>
             
-            {/* Total Count Bar - Always visible */}
-            <div className="video-progress-container">
-              {videos.map((_, idx) => (
-                <div 
-                  key={idx} 
-                  className={`video-progress-bar ${idx === currentVideo ? 'active' : ''}`}
-                  onClick={() => setCurrentVideo(idx)} // Added click to navigate
-                  style={{ cursor: 'pointer' }}
-                ></div>
-              ))}
-            </div>
+            {/* Total Count Bar - Only visible when multiple videos */}
+            {videos.length > 1 && (
+              <div className="video-progress-container">
+                {videos.map((_, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`video-progress-bar ${idx === currentVideo ? 'active' : ''}`}
+                    onClick={() => setCurrentVideo(idx)}
+                    style={{ cursor: 'pointer' }}
+                  ></div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="hero-device-mockup"></div>
         </div>
