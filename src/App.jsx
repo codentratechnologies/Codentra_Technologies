@@ -63,23 +63,6 @@ const App = () => {
         <About />
         <Services />
         <WhyChooseUs />
-
-        <div className="cta-divider section">
-          <div className="container">
-            <Reveal width="100%">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="glass-card cta-card"
-                style={{ textAlign: 'center' }}
-              >
-                <h2>{ctaContent.title}</h2>
-                <p>{ctaContent.desc}</p>
-                <a href={ctaContent.href} className="btn btn-primary" style={{ display: 'inline-block', marginTop: '1rem', padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem)', background: 'var(--color-blue)', borderRadius: '8px' }}>{ctaContent.btnText}</a>
-              </motion.div>
-            </Reveal>
-          </div>
-        </div>
-
         <Projects />
         <Testimonials />
         <Roadmap />

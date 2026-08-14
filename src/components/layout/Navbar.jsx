@@ -9,7 +9,7 @@ const Navbar = () => {
 
   useEffect(() => {
     // Classes known to have a white/light background
-    const lightClasses = ['services-section', 'projects-section', 'testimonials-section'];
+    const lightClasses = ['services-section', 'testimonials-section'];
 
     const handleScroll = () => {
       // Query sections dynamically in case they are rendered after navbar

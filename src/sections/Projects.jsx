@@ -111,8 +111,8 @@ const Projects = () => {
                 </div>
               )}
 
-              <div className="project-action-row">
-                {project.link ? (
+              {project.link && (
+                <div className="project-action-row">
                   <a
                     href={project.link}
                     target="_blank"
@@ -125,12 +125,8 @@ const Projects = () => {
                       <polyline points="7 7 17 7 17 17"></polyline>
                     </svg>
                   </a>
-                ) : (
-                  <span className="project-tag-proprietary">
-                    Internal Client Product
-                  </span>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             <div className="work-card-right">
