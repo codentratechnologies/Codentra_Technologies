@@ -21,40 +21,73 @@ const Projects = () => {
       isDesktop: "(min-width: 1025px)",
       reduceMotion: "(prefers-reduced-motion: reduce)"
     }, (context) => {
-      const { isMobile, isTablet } = context.conditions;
+      const { isMobile, isTablet, reduceMotion } = context.conditions;
       
       cards.forEach((card, i) => {
-        // Generous top clearance on mobile/tablet so the card NEVER touches the navbar/top edge
         const topOffset = isMobile ? '100px' : (isTablet ? '110px' : '110px');
 
+        // Set 3D perspective and hardware acceleration
+        gsap.set(card, {
+          transformPerspective: 1200,
+          transformOrigin: "center top",
+          force3D: true
+        });
+
+        // 1. Pin each card as it reaches the topOffset
         ScrollTrigger.create({
           trigger: card,
           start: `top ${topOffset}`,
           endTrigger: containerRef.current,
           end: 'bottom top',
           pin: true,
-          pinSpacing: false, // Don't add spacing so they stack seamlessly
+          pinSpacing: false,
           anticipatePin: 1,
           fastScrollEnd: true,
           id: `card-${i}`
         });
 
-        // Slight fade and slide-in for subsequent cards
+        // 2. Ultra-smooth 3D Slide & Scale-in animation for incoming cards
         if (i > 0) {
           gsap.fromTo(card,
-            { y: isMobile ? 40 : 80, opacity: 0.2 },
+            {
+              y: isMobile ? 35 : 60,
+              scale: 0.94,
+              opacity: 0.3,
+              rotateX: reduceMotion ? 0 : (isMobile ? 3 : 5)
+            },
             {
               y: 0,
+              scale: 1,
               opacity: 1,
+              rotateX: 0,
+              ease: "power2.out",
               scrollTrigger: {
                 trigger: card,
-                start: 'top 85%',
+                start: 'top 90%',
                 end: `top ${topOffset}`,
-                scrub: true,
+                scrub: 0.5,
                 fastScrollEnd: true
               }
             }
           );
+        }
+
+        // 3. Subtle 3D Depth recession as newer cards stack on top (if not the last card)
+        if (i < cards.length - 1 && !reduceMotion) {
+          const nextCard = cards[i + 1];
+          gsap.to(card, {
+            scale: isMobile ? 0.96 : 0.94,
+            opacity: isMobile ? 0.75 : 0.65,
+            y: isMobile ? -8 : -15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: nextCard,
+              start: `top 85%`,
+              end: `top ${topOffset}`,
+              scrub: 0.5,
+              fastScrollEnd: true
+            }
+          });
         }
       });
     });
