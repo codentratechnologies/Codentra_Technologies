@@ -7,8 +7,10 @@ import CursorGlow from './components/common/CursorGlow';
 import Reveal from './components/common/Reveal';
 
 gsap.registerPlugin(ScrollTrigger);
-ScrollTrigger.config({ ignoreMobileResize: true });
-ScrollTrigger.normalizeScroll(true);
+ScrollTrigger.config({ 
+  ignoreMobileResize: true,
+  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+});
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Services from './sections/Services';

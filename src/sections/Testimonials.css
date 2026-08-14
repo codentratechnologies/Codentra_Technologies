@@ -91,7 +91,10 @@
   gap: 2rem;
   padding: 0 1rem;
   width: max-content;
-  animation: scrollTestimonials 30s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation: scrollTestimonials 35s linear infinite;
 }
 
 /* Only allow hover-pausing on devices that support mouse hover */
@@ -108,11 +111,11 @@
 
 @keyframes scrollTestimonials {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateX(calc(-25% - 0.5rem));
+    transform: translate3d(calc(-25% - 0.5rem), 0, 0);
   }
 
   /* -25% of the total track since we duplicated 4 times, minus gap compensation */

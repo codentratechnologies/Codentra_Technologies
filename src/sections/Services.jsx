@@ -22,11 +22,18 @@ const Services = () => {
     const cards = gsap.utils.toArray('.service-card');
     const mm = gsap.matchMedia();
 
-    mm.add("all", () => {
+    mm.add({
+      isMobile: "(max-width: 768px)",
+      isDesktop: "(min-width: 769px)"
+    }, (context) => {
+      const { isMobile } = context.conditions;
+
       cards.forEach((card, i) => {
+        const pinOffset = isMobile ? `top ${15 + (i * 1.5)}%` : `top ${18 + (i * 2)}%`;
+
         ScrollTrigger.create({
           trigger: card,
-          start: `top ${20 + (i * 2)}%`, // Stagger the pinning point slightly so they layer visibly
+          start: pinOffset,
           endTrigger: cardsContainerRef.current,
           end: 'bottom bottom',
           pin: true,
@@ -36,18 +43,19 @@ const Services = () => {
           id: `service-card-${i}`
         });
 
-        // Add a scale effect to give a sense of depth
+        // Add a scale effect with hardware-accelerated transforms
         if (i > 0) {
           gsap.fromTo(card,
-            { scale: 0.95, y: 100 },
+            { scale: isMobile ? 0.98 : 0.95, y: isMobile ? 40 : 80 },
             {
               scale: 1,
               y: 0,
+              ease: "none",
               scrollTrigger: {
                 trigger: card,
-                start: 'top 90%',
-                end: `top ${20 + (i * 2)}%`,
-                scrub: true,
+                start: 'top 95%',
+                end: pinOffset,
+                scrub: 0.5,
                 fastScrollEnd: true
               }
             }
