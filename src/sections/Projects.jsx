@@ -78,7 +78,7 @@ const Projects = () => {
 
       <div className="projects-cards-container">
         {projectsData.map((project, idx) => (
-          <div key={idx} className="work-card">
+          <div key={idx} className={`work-card ${project.link ? 'has-link' : 'no-link'}`}>
             {/* Card Background Ambient Glow */}
             <div className="work-card-ambient-glow"></div>
 
