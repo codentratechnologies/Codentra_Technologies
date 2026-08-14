@@ -24,16 +24,26 @@ const Projects = () => {
       const { isMobile, isTablet, reduceMotion } = context.conditions;
       
       cards.forEach((card, i) => {
-        const topOffset = isMobile ? '100px' : (isTablet ? '110px' : '110px');
+        const topOffset = isMobile ? '95px' : (isTablet ? '105px' : '110px');
+        const mockup = card.querySelector('.browser-mockup-frame');
+        const glow = card.querySelector('.work-card-ambient-glow');
 
-        // Set 3D perspective and hardware acceleration
+        // Set card 3D spatial properties
         gsap.set(card, {
-          transformPerspective: 1200,
-          transformOrigin: "center top",
+          transformPerspective: 1600,
+          transformOrigin: isMobile ? "center top" : "50% 20%",
+          transformStyle: "preserve-3d",
           force3D: true
         });
 
-        // 1. Pin each card as it reaches the topOffset
+        if (mockup && !reduceMotion) {
+          gsap.set(mockup, {
+            transformPerspective: 1200,
+            force3D: true
+          });
+        }
+
+        // 1. Precise stacking pin
         ScrollTrigger.create({
           trigger: card,
           start: `top ${topOffset}`,
@@ -43,48 +53,83 @@ const Projects = () => {
           pinSpacing: false,
           anticipatePin: 1,
           fastScrollEnd: true,
-          id: `card-${i}`
+          id: `card-pin-${i}`
         });
 
-        // 2. Ultra-smooth 3D Slide & Scale-in animation for incoming cards
+        // 2. 3D Spatial Entry Animation for incoming cards
         if (i > 0) {
-          gsap.fromTo(card,
+          const entryTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: isMobile ? 'top 92%' : 'top 88%',
+              end: `top ${topOffset}`,
+              scrub: 0.6,
+              fastScrollEnd: true
+            }
+          });
+
+          entryTl.fromTo(card,
             {
-              y: isMobile ? 35 : 60,
-              scale: 0.94,
-              opacity: 0.3,
-              rotateX: reduceMotion ? 0 : (isMobile ? 3 : 5)
+              y: isMobile ? 45 : 90,
+              scale: isMobile ? 0.92 : 0.90,
+              rotateX: reduceMotion ? 0 : (isMobile ? 6 : 9),
+              rotateY: reduceMotion ? 0 : (isMobile ? 0 : -2),
+              opacity: 0.25,
+              filter: isMobile ? "none" : "brightness(0.9)"
             },
             {
               y: 0,
               scale: 1,
-              opacity: 1,
               rotateX: 0,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 90%',
-                end: `top ${topOffset}`,
-                scrub: 0.5,
-                fastScrollEnd: true
-              }
+              rotateY: 0,
+              opacity: 1,
+              filter: "brightness(1)",
+              ease: "power2.out"
             }
           );
+
+          // 3D Parallax lift for the mockup inside the card
+          if (mockup && !reduceMotion) {
+            entryTl.fromTo(mockup,
+              {
+                y: isMobile ? 20 : 35,
+                rotateX: isMobile ? 4 : 7,
+                scale: 0.95
+              },
+              {
+                y: 0,
+                rotateX: 0,
+                scale: 1,
+                ease: "power2.out"
+              },
+              0
+            );
+          }
+
+          if (glow && !reduceMotion) {
+            entryTl.fromTo(glow,
+              { opacity: 0.2, scale: 0.8 },
+              { opacity: 1, scale: 1, ease: "power2.out" },
+              0
+            );
+          }
         }
 
-        // 3. Subtle 3D Depth recession as newer cards stack on top (if not the last card)
+        // 3. Subtle 3D Layer Stack Recession when next card overlaps
         if (i < cards.length - 1 && !reduceMotion) {
           const nextCard = cards[i + 1];
           gsap.to(card, {
-            scale: isMobile ? 0.96 : 0.94,
-            opacity: isMobile ? 0.75 : 0.65,
-            y: isMobile ? -8 : -15,
-            ease: "none",
+            scale: isMobile ? 0.95 : 0.93,
+            y: isMobile ? -6 : -14,
+            rotateX: isMobile ? -2 : -3.5,
+            opacity: isMobile ? 0.7 : 0.55,
+            filter: isMobile ? "none" : "brightness(0.92)",
+            ease: "power1.inOut",
             scrollTrigger: {
               trigger: nextCard,
-              start: `top 85%`,
+              start: isMobile ? 'top 90%' : 'top 85%',
               end: `top ${topOffset}`,
-              scrub: 0.5,
+              scrub: 0.6,
               fastScrollEnd: true
             }
           });
