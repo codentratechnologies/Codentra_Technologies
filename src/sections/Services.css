@@ -1,8 +1,7 @@
 .services-section {
   width: 100%;
   background-color: #ffffff;
-  padding: clamp(4rem, 10vw, 6rem) clamp(1rem, 5vw, 2rem);
-  padding-bottom: 15vh; /* Extra spacing after the last card */
+  padding: var(--section-padding-y) var(--section-padding-x) clamp(4rem, 10vh, 7rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +13,7 @@
   max-width: 1400px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 4rem;
+  margin-bottom: var(--section-header-mb);
 }
 
 .services-header-label {

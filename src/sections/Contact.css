@@ -2,7 +2,7 @@
   width: 100%;
   background-color: #0a0a0a;
   background: radial-gradient(circle at 30% 50%, rgba(0, 229, 255, 0.08) 0%, #0a0a0a 60%);
-  padding: clamp(4rem, 10vw, 8rem) 0;
+  padding: var(--section-padding-y) 0;
   display: flex;
   justify-content: center;
   color: white;
@@ -14,7 +14,7 @@
 .contact-container {
   width: 100%;
   max-width: 800px; /* Constrain max width for vertical stack */
-  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  padding: 0 var(--section-padding-x);
   display: flex;
   flex-direction: column;
   justify-content: center;

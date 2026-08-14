@@ -3,7 +3,7 @@
   background-color: #050505;
   background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.05) 0%, #050505 70%);
   color: white;
-  padding: clamp(3rem, 8vw, 6rem) 0 clamp(1.5rem, 4vw, 3rem);
+  padding: var(--section-padding-y) 0 clamp(1.5rem, 4vw, 3rem);
   display: flex;
   justify-content: center;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -15,7 +15,7 @@
 .footer-container {
   width: 100%;
   max-width: 1400px;
-  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  padding: 0 var(--section-padding-x);
 }
 
 .footer-grid {

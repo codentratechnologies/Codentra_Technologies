@@ -8,6 +8,11 @@
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Standardized, Fully Responsive Section Spacing Across All Screens */
+  --section-padding-y: clamp(3.5rem, 8vw, 6.5rem);
+  --section-padding-x: clamp(1rem, 4vw, 2.5rem);
+  --section-header-mb: clamp(2rem, 5vw, 3.5rem);
 }
 
 * {
@@ -63,7 +68,7 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: var(--section-header-mb);
   margin-inline: auto;
 }
 

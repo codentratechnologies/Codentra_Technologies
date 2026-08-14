@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+  padding: var(--section-padding-y) var(--section-padding-x);
   position: relative;
   overflow: hidden;
 }

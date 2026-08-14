@@ -1,7 +1,7 @@
 .why-section {
   width: 100%;
   background-color: #0a0a0a;
-  padding: clamp(4rem, 10vw, 8rem) 0;
+  padding: var(--section-padding-y) 0;
   color: white;
   display: flex;
   justify-content: center;
@@ -10,11 +10,11 @@
 .why-container {
   width: 100%;
   max-width: 1600px;
-  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  padding: 0 var(--section-padding-x);
 }
 
 .why-header {
-  margin-bottom: 4rem;
+  margin-bottom: var(--section-header-mb);
 }
 
 .why-subtitle {
