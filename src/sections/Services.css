@@ -58,14 +58,19 @@
 
 .services-cards-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
+  margin: 0 auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   /* Extra padding to scroll through the stacked cards */
   padding-bottom: 30vh;
 }
 
 .service-card {
   width: 100%;
+  max-width: 1200px;
   height: auto;
   min-height: clamp(350px, 40vh, 550px);
   max-height: 75vh; /* Ensure card is never taller than viewport to prevent clipping overlaps */
@@ -78,6 +83,34 @@
   will-change: transform, opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+@media (max-width: 1024px) {
+  .services-cards-container {
+    max-width: 780px;
+    width: 92%;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-cards-container {
+    max-width: 420px;
+    width: 88%;
+    margin: 0 auto;
+  }
+  
+  .service-card {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-cards-container {
+    max-width: 360px;
+    width: 86%;
+  }
 }
 
 .service-card-bg-ui {
