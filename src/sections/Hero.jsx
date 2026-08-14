@@ -150,19 +150,8 @@ const Hero = () => {
         pin: true,
         scrub: 1,
         onUpdate: (self) => {
-          // Trigger fullscreen state when the animation is mostly complete
           const isFull = self.progress > 0.8;
-          setIsFullscreen(prev => {
-            if (prev !== isFull) {
-              // Reset video system when switching states
-              setCurrentVideo(0);
-              if (videoRefs.current[0]) {
-                videoRefs.current[0].currentTime = 0;
-                videoRefs.current[0].play().catch(e => console.log(e));
-              }
-            }
-            return isFull;
-          });
+          setIsFullscreen(isFull);
         }
       }
     });

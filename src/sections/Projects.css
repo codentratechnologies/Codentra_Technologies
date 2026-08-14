@@ -93,114 +93,105 @@
   width: 100%;
   max-width: 1400px;
   position: relative;
-  /* Reduced padding bottom to decrease gap before Testimonials */
-  padding-bottom: 15vh;
+  /* Safe margin & scroll clearance before next section */
+  padding-bottom: clamp(6rem, 15vh, 12rem);
 }
-
-@media (min-width: 1024px) and (max-width: 1440px) {
-  .projects-cards-container {
-    padding-bottom: 20vh;
-  }
-}
-
 
 .work-card {
   width: 100%;
   height: auto;
+  min-height: clamp(380px, 50vh, 560px);
+  max-height: calc(100dvh - 130px); /* Never overflow or touch bottom of viewport */
   background-color: #0d1116;
-  border-radius: 24px;
+  border-radius: clamp(16px, 2.5vw, 24px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* Top margin offsets each card slightly when stacked on desktop */
-  margin-bottom: 2rem;
-  /* Hardware acceleration for smoother animations on mobile */
+  margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
   will-change: transform, opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
-
-
 @media (min-width: 768px) {
   .work-card {
     flex-direction: row;
-    height: 550px; /* Fixed height for all cards */
+    height: clamp(420px, 55vh, 550px);
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1440px) {
   .work-card {
-    height: 480px; 
-    margin-bottom: 2.5rem;
+    height: clamp(400px, 50vh, 480px); 
+    margin-bottom: 2rem;
   }
   .work-card-left {
-    padding: 2.5rem;
+    padding: clamp(2rem, 3vw, 2.5rem);
   }
   .work-card-left h3 {
-    font-size: clamp(24px, 3vw, 40px);
-    margin-bottom: 1rem;
+    font-size: clamp(22px, 2.5vw, 36px);
+    margin-bottom: 0.75rem;
   }
   .work-card-left p {
-    margin-bottom: 2rem;
-    font-size: 15px;
+    margin-bottom: 1.5rem;
+    font-size: 14px;
   }
 }
-
 
 .work-card-left {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(1.5rem, 5vw, 3rem);
+  padding: clamp(1.25rem, 4vw, 3.5rem);
   color: white;
+  overflow-y: auto; /* Prevent any content cutoff inside small screens */
 }
 
 @media (min-width: 1024px) {
   .work-card-left {
-    padding: 4rem;
+    padding: 3.5rem;
   }
 }
 
 .work-card-left h3 {
-  font-size: clamp(28px, 3.5vw, 48px);
+  font-size: clamp(24px, 3vw, 42px);
   font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
+  line-height: 1.15;
+  margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
 }
 
 .work-card-left p {
   color: #9ca3af;
-  font-size: clamp(14px, 1.25vw, 18px);
-  line-height: 1.6;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1.55;
   max-width: 500px;
-  margin-bottom: 3rem;
+  margin-bottom: clamp(1.25rem, 2.5vh, 2.25rem);
 }
 
 .work-card-stats {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: clamp(1rem, 4vw, 2rem);
+  gap: clamp(0.75rem, 3vw, 1.75rem);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem);
-  border-radius: 4px;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.75rem, 3vw, 1.5rem);
+  border-radius: 6px;
   background: rgba(255, 255, 255, 0.02);
   width: fit-content;
   max-width: 100%;
 }
 
 .stat-item h4 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 700;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.15rem 0;
 }
 
 .stat-item p {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #9ca3af;
   text-transform: uppercase;
@@ -211,10 +202,10 @@
 .project-external-link {
   display: inline-flex;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: clamp(1rem, 2vh, 1.75rem);
   color: #00E5FF;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(13px, 1vw, 15px);
   text-decoration: none;
   transition: opacity var(--transition-fast);
   width: fit-content;
@@ -227,7 +218,7 @@
 
 .divider {
   width: 1px;
-  height: 3rem;
+  height: 2.5rem;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -236,19 +227,19 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  justify-content: center; /* Centered on mobile */
+  justify-content: center;
   padding-top: 1rem;
 }
 
 @media (min-width: 768px) {
   .work-card-right {
     justify-content: flex-end;
-    padding-top: 3rem;
+    padding-top: 2rem;
   }
 }
 
 .mockup-placeholder {
-  width: 110%;
+  width: 105%;
   height: 90%;
   background-color: #1a2332;
   border-top-left-radius: 12px;
@@ -259,7 +250,7 @@
 }
 
 .mockup-image {
-  width: 110%;
+  width: 105%;
   height: auto;
   max-height: 95%;
   object-fit: cover;
@@ -273,21 +264,18 @@
 
 @media (max-width: 768px) {
   .work-card {
-    flex-direction: column-reverse; /* Puts image at top */
-    background-color: #0d1116;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 20px 40px -15px rgba(0, 229, 255, 0.08);
-    height: calc(100dvh - 140px); /* Responsive to mobile viewport to prevent bottom cut-off */
-    min-height: 550px; /* Ensure it doesn't get too small */
-    max-height: 700px;
+    flex-direction: column-reverse; /* Image on top */
+    height: auto;
+    max-height: calc(100dvh - 100px); /* Always keep safe clearance from screen bottom */
+    min-height: 0;
     overflow: hidden;
   }
   
   .work-card-right {
     width: 100%;
-    height: 200px;
-    min-height: 200px;
+    height: clamp(140px, 25vh, 220px);
+    min-height: 120px;
+    flex-shrink: 0;
     padding: 0;
     position: relative;
     display: block;
@@ -298,70 +286,71 @@
     height: 100%;
     max-height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     border-radius: 0;
   }
   
   .work-card-left {
     width: 100%;
-    padding: 1.5rem;
+    padding: clamp(1rem, 3.5vw, 1.5rem);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     position: relative;
     flex: 1;
+    overflow-y: auto;
   }
   
   .work-card-left h3 {
-    font-size: 26px;
-    margin-bottom: 0.5rem;
+    font-size: clamp(20px, 5.5vw, 24px);
+    margin-bottom: 0.35rem;
     color: white;
   }
   
   .work-card-left p {
-    font-size: 14px;
-    margin-bottom: 1.5rem;
+    font-size: clamp(12px, 3.5vw, 13.5px);
+    margin-bottom: 0.85rem;
     color: #9ca3af;
-    line-height: 1.6;
-    display: block;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   
   .work-card-stats {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
     padding: 0;
     width: 100%;
     justify-content: flex-start;
     background: transparent;
     border: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.85rem;
   }
   
   .stat-item {
     background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     padding: 0;
-    border-radius: 0;
     border: none;
   }
   
   .stat-item h4 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.4rem);
     color: white;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0;
   }
   
   .stat-item p {
     color: #9ca3af;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
   }
   
   .divider {
     width: 1px;
-    height: 2.5rem;
+    height: 2rem;
     background-color: rgba(255, 255, 255, 0.1);
     display: block;
   }
@@ -375,11 +364,6 @@
     border: none;
     padding: 0;
     font-weight: 600;
-  }
-  
-  .project-external-link:hover {
-    background: transparent;
-    color: white;
-    text-decoration: underline;
+    font-size: 13px;
   }
 }

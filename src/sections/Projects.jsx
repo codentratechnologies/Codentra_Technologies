@@ -15,31 +15,43 @@ const Projects = () => {
 
     const mm = gsap.matchMedia();
 
-    mm.add("all", () => {
-      // Create the stacked pinning effect on all devices
+    mm.add({
+      isMobile: "(max-width: 768px)",
+      isTablet: "(min-width: 769px) and (max-width: 1024px)",
+      isDesktop: "(min-width: 1025px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { isMobile, isTablet } = context.conditions;
+      
       cards.forEach((card, i) => {
+        // Calculate pinning top offset dynamically based on header/viewport
+        const topOffset = isMobile ? '80px' : (isTablet ? '100px' : '110px');
+
         ScrollTrigger.create({
           trigger: card,
-          start: 'top 120px', // Pin at a fixed pixel coordinate to ensure perfect stacking on mobile
+          start: `top ${topOffset}`,
           endTrigger: containerRef.current,
           end: 'bottom top',
           pin: true,
-          pinSpacing: false, // Don't add spacing so they overlap
+          pinSpacing: false, // Don't add spacing so they stack seamlessly
+          anticipatePin: 1,
+          fastScrollEnd: true,
           id: `card-${i}`
         });
 
-        // Optional: Add a slight scale down or darken effect to cards behind
+        // Slight fade and slide-in for subsequent cards
         if (i > 0) {
           gsap.fromTo(card,
-            { y: 100, opacity: 0 },
+            { y: isMobile ? 40 : 80, opacity: 0.2 },
             {
               y: 0,
               opacity: 1,
               scrollTrigger: {
                 trigger: card,
-                start: 'top 80%',
-                end: 'top 20%',
-                scrub: true
+                start: 'top 85%',
+                end: `top ${topOffset}`,
+                scrub: true,
+                fastScrollEnd: true
               }
             }
           );
